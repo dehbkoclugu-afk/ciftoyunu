@@ -127,5 +127,5 @@
 - [x] Run Prettier, ESLint with zero warnings, TypeScript, and all Jest suites.
 - [x] Run content validation, duplicate scan, inventory report, and generated drift check.
 - [x] Run Expo Doctor and web export; rely on GitHub Actions for Doctor only if local registry access is blocked.
-- [ ] Flush task observations and close every plan checkbox.
-- [ ] Commit intentionally, publish the branch, open the stacked draft PR, and wait for green CI.
+- [x] Flush task observations and close every plan checkbox.
+- [x] Commit intentionally, publish the branch, open the stacked draft PR, and wait for green CI.

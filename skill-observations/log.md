@@ -64,3 +64,5 @@ Checkpoint PR4 data layer: no additional observations.
 **Suggested improvement:** Add a prerequisite probe for a cached or installed CLI and document an explicit offline-safe fallback or a clear stop condition before asking the wrapper to fetch the package.
 
 **Principle:** A bundled launcher is not an offline capability unless its executable dependency is bundled or its network requirement is declared and checked first.
+
+Checkpoint PR4 completion: no additional observations.
