@@ -1,8 +1,14 @@
+import { useEffect } from 'react';
 import { Stack } from 'expo-router';
+import * as SplashScreen from 'expo-splash-screen';
 import { StatusBar } from 'expo-status-bar';
 import { SafeAreaProvider } from 'react-native-safe-area-context';
 
 import { ThemeProvider, useAppTheme } from '@/design';
+import { useAppStore } from '@/state/appStore';
+import { useSettingsStore } from '@/state/settingsStore';
+
+void SplashScreen.preventAutoHideAsync().catch(() => undefined);
 
 function RootStack() {
   const theme = useAppTheme();
@@ -11,6 +17,7 @@ function RootStack() {
     <>
       <StatusBar style={theme.mode === 'dark' ? 'light' : 'dark'} />
       <Stack
+        initialRouteName="index"
         screenOptions={{
           headerShown: false,
           contentStyle: { backgroundColor: theme.colors.canvas },
@@ -21,12 +28,33 @@ function RootStack() {
   );
 }
 
+function AppShell() {
+  const hydrate = useAppStore((state) => state.hydrate);
+  const bootStatus = useAppStore((state) => state.bootStatus);
+  const themePreference = useSettingsStore((state) => state.theme);
+  const forcedScheme = themePreference === 'system' ? undefined : themePreference;
+
+  useEffect(() => {
+    void hydrate();
+  }, [hydrate]);
+
+  useEffect(() => {
+    if (bootStatus === 'ready') {
+      void SplashScreen.hideAsync().catch(() => undefined);
+    }
+  }, [bootStatus]);
+
+  return (
+    <ThemeProvider {...(forcedScheme ? { forcedScheme } : {})}>
+      <RootStack />
+    </ThemeProvider>
+  );
+}
+
 export default function RootLayout() {
   return (
     <SafeAreaProvider>
-      <ThemeProvider>
-        <RootStack />
-      </ThemeProvider>
+      <AppShell />
     </SafeAreaProvider>
   );
 }
