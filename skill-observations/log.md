@@ -41,3 +41,7 @@ Checkpoint 6: no additional observations.
 **Principle:** A mandatory setup step must either ship with the validated artifact or define a complete fallback that preserves the workflow.
 
 Checkpoint PR2 completion: no additional observations.
+
+Checkpoint PR3 core: no additional observations.
+
+Checkpoint PR3 completion: no additional observations.

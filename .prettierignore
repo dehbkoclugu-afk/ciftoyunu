@@ -4,3 +4,5 @@ dist
 coverage
 package-lock.json
 docs/product/master-implementation-plan.md
+src/content/bundles/*.json
+src/content/manifests/*.json
