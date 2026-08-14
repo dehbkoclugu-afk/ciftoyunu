@@ -119,8 +119,8 @@
 - Consumes: completed PR 6 tree
 - Produces: green local checks and a draft PR targeting `agent/pr5-pack-library`
 
-- [ ] Run Prettier, ESLint with zero warnings, TypeScript, and all Jest suites.
-- [ ] Run content validation, duplicate scan, inventory report, and generated drift check.
-- [ ] Run Expo Doctor and web export.
-- [ ] Flush task observations and close every plan checkbox.
-- [ ] Commit intentionally, publish the branch, open the stacked draft PR, and wait for green CI.
+- [x] Run Prettier, ESLint with zero warnings, TypeScript, and all Jest suites.
+- [x] Run content validation, duplicate scan, inventory report, and generated drift check.
+- [x] Run Expo Doctor and web export.
+- [x] Flush task observations and close every plan checkbox.
+- [x] Commit intentionally, publish the branch, open the stacked draft PR, and wait for green CI.
