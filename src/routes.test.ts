@@ -4,6 +4,8 @@ import WelcomeScreen from '../app/onboarding/welcome';
 import DevGalleryScreen from '../app/dev-gallery';
 import HomeScreen from '../app/home';
 import LaunchScreen from '../app/index';
+import ModeScreen from '../app/mode';
+import PlayersScreen from '../app/players';
 
 describe('route modules', () => {
   it('exports launch, onboarding, home, and development gallery surfaces', () => {
@@ -12,6 +14,8 @@ describe('route modules', () => {
     expect(WelcomeScreen).toEqual(expect.any(Function));
     expect(ComfortScreen).toEqual(expect.any(Function));
     expect(HomeScreen).toEqual(expect.any(Function));
+    expect(ModeScreen).toEqual(expect.any(Function));
+    expect(PlayersScreen).toEqual(expect.any(Function));
     expect(DevGalleryScreen).toEqual(expect.any(Function));
   });
 });
