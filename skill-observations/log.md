@@ -39,3 +39,5 @@ Checkpoint 6: no additional observations.
 **Suggested improvement:** Make the context script part of package validation, or document a deterministic reference-only fallback when the script is absent.
 
 **Principle:** A mandatory setup step must either ship with the validated artifact or define a complete fallback that preserves the workflow.
+
+Checkpoint PR2 completion: no additional observations.

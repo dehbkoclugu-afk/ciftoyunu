@@ -25,8 +25,8 @@
 
 - [x] Confirm Expo-bundled native versions.
 - [x] Install the minimum four dependencies.
-- [ ] Run dependency and type validation.
-- [ ] Commit dependency changes with the PR slice.
+- [x] Run dependency and type validation.
+- [x] Commit dependency changes with the PR slice.
 
 ### Task 2: Add locale catalog and selection
 
@@ -34,11 +34,11 @@
 
 **Interfaces:** Consume a device locale string; produce SupportedLocale, native labels, and RTL metadata.
 
-- [ ] Write failing normalization tests.
-- [ ] Verify the missing-module failure.
-- [ ] Implement locale normalization and catalog.
-- [ ] Run the locale tests.
-- [ ] Commit with the remaining PR implementation.
+- [x] Write failing normalization tests.
+- [x] Verify the missing-module failure.
+- [x] Implement locale normalization and catalog.
+- [x] Run the locale tests.
+- [x] Commit with the remaining PR implementation.
 
 ### Task 3: Add versioned settings storage
 
@@ -46,11 +46,11 @@
 
 **Interfaces:** Consume unknown persisted settings and a StorageAdapter; produce normalized SettingsData, quarantine-on-corruption, and settings actions.
 
-- [ ] Write failing migration and quarantine tests.
-- [ ] Verify expected missing exports.
-- [ ] Implement defaults, migration, repository, and store.
-- [ ] Run storage tests.
-- [ ] Commit with the remaining PR implementation.
+- [x] Write failing migration and quarantine tests.
+- [x] Verify expected missing exports.
+- [x] Implement defaults, migration, repository, and store.
+- [x] Run storage tests.
+- [x] Commit with the remaining PR implementation.
 
 ### Task 4: Coordinate hydration and routing
 
@@ -58,11 +58,11 @@
 
 **Interfaces:** Consume hydration state and onboardingCompleted; produce no premature render, then onboarding or home redirect.
 
-- [ ] Write failing route-decision tests.
-- [ ] Verify expected failure.
-- [ ] Implement boot store, splash coordination, redirects, and home move.
-- [ ] Run route and component tests.
-- [ ] Commit with the remaining PR implementation.
+- [x] Write failing route-decision tests.
+- [x] Verify expected failure.
+- [x] Implement boot store, splash coordination, redirects, and home move.
+- [x] Run route and component tests.
+- [x] Commit with the remaining PR implementation.
 
 ### Task 5: Build the onboarding screens
 
@@ -70,11 +70,11 @@
 
 **Interfaces:** Consume settings actions and Expo Router; produce persisted locale, explicit age/comfort state, and onboarding completion.
 
-- [ ] Write failing mature-content policy tests.
-- [ ] Verify expected failure.
-- [ ] Implement shared components and screens.
-- [ ] Verify accessibility states and navigation.
-- [ ] Commit with the remaining PR implementation.
+- [x] Write failing mature-content policy tests.
+- [x] Verify expected failure.
+- [x] Implement shared components and screens.
+- [x] Verify accessibility states and navigation.
+- [x] Commit with the remaining PR implementation.
 
 ### Task 6: Validate and publish the stacked PR
 
@@ -82,8 +82,8 @@
 
 **Interfaces:** Consume the completed tree; produce green checks and a draft PR targeting agent/pr1-bootstrap.
 
-- [ ] Run Prettier, ESLint, TypeScript, and Jest.
-- [ ] Run Expo Doctor and web export.
-- [ ] Perform one bounded onboarding UI inspection.
-- [ ] Flush task observations.
-- [ ] Commit, publish, and open the draft PR.
+- [x] Run Prettier, ESLint, TypeScript, and Jest.
+- [x] Run Expo Doctor and web export.
+- [x] Perform one bounded onboarding UI inspection.
+- [x] Flush task observations.
+- [x] Commit, publish, and open the draft PR.
