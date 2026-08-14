@@ -161,4 +161,4 @@
 - [x] Run Expo Doctor and web export.
 - [x] Perform one batched mobile/desktop UI audit, apply material fixes, and confirm once. The offline Playwright runner remained unavailable, so this used responsive source/test coverage plus the production web bundle rather than screenshots.
 - [x] Read the UI pre-delivery rules, flush task observations, and close every plan checkbox.
-- [ ] Commit intentionally, publish the branch, open the stacked draft PR, and wait for green CI.
+- [x] Commit intentionally, publish the branch, open the stacked draft PR, and wait for green CI.
