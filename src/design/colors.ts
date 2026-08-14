@@ -1,0 +1,43 @@
+export const palette = {
+  light: {
+    canvas: '#FFF9F4',
+    surface: '#FFFFFF',
+    surfaceRaised: '#FFFDFB',
+    ink: '#1C1720',
+    inkMuted: '#756C79',
+    primary: '#7357E8',
+    onPrimary: '#FFFFFF',
+    coral: '#F25F70',
+    gold: '#E9A83B',
+    mint: '#2FB89D',
+    danger: '#C63D4F',
+    outline: '#E8DFE7',
+  },
+  dark: {
+    canvas: '#121015',
+    surface: '#1D1922',
+    surfaceRaised: '#28212E',
+    ink: '#FFF8F2',
+    inkMuted: '#B9AFBC',
+    primary: '#9B86FF',
+    onPrimary: '#1C1720',
+    coral: '#FF7685',
+    gold: '#FFC45C',
+    mint: '#54D8BC',
+    danger: '#FF6A79',
+    outline: '#3A3240',
+  },
+} as const;
+
+export const categoryColors = {
+  warmUp: '#F3B65C',
+  fun: '#55BCEB',
+  deep: '#7357E8',
+  memories: '#C879D6',
+  future: '#2FB89D',
+  conflict: '#E16A55',
+  appreciation: '#F09AAB',
+  spicy: '#D8425B',
+  friends: '#4E8CD8',
+  wildcards: '#786B82',
+} as const;
