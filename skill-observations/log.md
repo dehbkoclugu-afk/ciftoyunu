@@ -87,3 +87,9 @@ Checkpoint PR5 design: no additional observations.
 Checkpoint PR5 implementation: no additional observations.
 
 Checkpoint PR5 completion: no additional observations.
+
+Checkpoint PR6 design: no additional observations.
+
+Checkpoint PR6 implementation: no additional observations.
+
+Checkpoint PR6 completion: no additional observations.
