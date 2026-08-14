@@ -45,3 +45,22 @@ Checkpoint PR2 completion: no additional observations.
 Checkpoint PR3 core: no additional observations.
 
 Checkpoint PR3 completion: no additional observations.
+
+Checkpoint PR4 design: no additional observations.
+
+Checkpoint PR4 data layer: no additional observations.
+
+### Observation 3: Document an offline path for the Playwright CLI wrapper
+
+**Status:** OPEN
+**Date:** 2026-08-14
+**Session context:** Visually verifying a locally exported mobile web surface in a restricted workspace
+**Skill:** playwright
+**Type:** open-source
+**Phase/Area:** Prerequisite setup
+
+**Issue:** The bundled wrapper is described as working without a global CLI, but it delegates to `npx --package` and therefore still requires registry access when the package is not cached. In a network-restricted environment, browser verification stops after the prerequisite check even when the application and Node runtime are available locally.
+
+**Suggested improvement:** Add a prerequisite probe for a cached or installed CLI and document an explicit offline-safe fallback or a clear stop condition before asking the wrapper to fetch the package.
+
+**Principle:** A bundled launcher is not an offline capability unless its executable dependency is bundled or its network requirement is declared and checked first.

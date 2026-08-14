@@ -13,6 +13,7 @@ type SettingsActions = {
   setLocale: (locale: SupportedLocale) => void;
   setAgeConfirmed: (confirmed: boolean) => void;
   setComfort: (comfortLevel: SettingsData['comfortLevel']) => void;
+  setRememberPlayers: (rememberPlayers: boolean) => void;
   completeOnboarding: () => void;
 };
 
@@ -57,6 +58,7 @@ export const useSettingsStore = create<SettingsStore>((set, get) => {
         comfortLevel,
         matureContentEnabled: comfortLevel === 'spicy' && get().ageConfirmed18,
       }),
+    setRememberPlayers: (rememberPlayers) => persist({ rememberPlayers }),
     completeOnboarding: () => persist({ onboardingCompleted: true }),
   };
 });

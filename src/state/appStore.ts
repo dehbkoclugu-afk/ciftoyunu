@@ -1,6 +1,7 @@
 import { create } from 'zustand';
 
 import { loadPersistedSettings, useSettingsStore } from './settingsStore';
+import { useGameSetupStore } from './gameSetupStore';
 import type { BootStatus } from './routeDecision';
 
 type AppStore = {
@@ -16,6 +17,7 @@ export const useAppStore = create<AppStore>((set, get) => ({
 
     const settings = await loadPersistedSettings();
     useSettingsStore.getState().replaceSettings(settings);
+    await useGameSetupStore.getState().hydrate(settings.rememberPlayers);
     set({ bootStatus: 'ready' });
   },
 }));
