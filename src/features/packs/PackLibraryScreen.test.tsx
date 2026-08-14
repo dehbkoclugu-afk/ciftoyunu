@@ -8,9 +8,13 @@ import { useSettingsStore } from '@/state/settingsStore';
 import { DEFAULT_SETTINGS } from '@/storage/migrations';
 
 const mockBack = jest.fn();
+const mockPush = jest.fn();
 
 jest.mock('expo-router', () => ({
-  router: { back: (...args: unknown[]) => mockBack(...args) },
+  router: {
+    back: (...args: unknown[]) => mockBack(...args),
+    push: (...args: unknown[]) => mockPush(...args),
+  },
 }));
 
 function renderScreen() {
@@ -63,9 +67,7 @@ describe('pack library screen', () => {
 
     await fireEvent.press(screen.getByRole('button', { name: 'Choose Warm Start' }));
     expect(useGameSetupStore.getState().selectedPackId).toBe('warm_start');
-    expect(
-      screen.getByRole('button', { name: 'Open Warm Start details' }).props.accessibilityState,
-    ).toEqual({ selected: true });
+    expect(mockPush).toHaveBeenCalledWith('/session-setup');
   });
 
   it('explains premium lock without exposing a fake purchase action', async () => {
