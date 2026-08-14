@@ -89,4 +89,16 @@ describe('game setup store', () => {
     await store.getState().forgetPlayers();
     expect(save).toHaveBeenLastCalledWith(expect.any(Object), false);
   });
+
+  it('selects one pack and clears it when the mode changes', () => {
+    const store = createGameSetupStore(createRepository());
+
+    store.getState().selectPack('warm_start');
+    expect(store.getState().selectedPackId).toBe('warm_start');
+    store.getState().selectPack('appreciation');
+    expect(store.getState().selectedPackId).toBe('appreciation');
+
+    store.getState().selectMode('friends');
+    expect(store.getState().selectedPackId).toBeNull();
+  });
 });

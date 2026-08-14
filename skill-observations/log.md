@@ -66,3 +66,24 @@ Checkpoint PR4 data layer: no additional observations.
 **Principle:** A bundled launcher is not an offline capability unless its executable dependency is bundled or its network requirement is declared and checked first.
 
 Checkpoint PR4 completion: no additional observations.
+
+Checkpoint PR5 design: no additional observations.
+
+### Observation 4: Verify renderer delegates before prescribing asset commands
+
+**Status:** OPEN
+**Date:** 2026-08-14
+**Session context:** Rendering reproducible SVG pack covers to PNG inside a restricted project workspace
+**Skill:** writing-plans
+**Type:** open-source
+**Phase/Area:** Verification commands
+
+**Issue:** The plan checked that ImageMagick's `convert` executable existed, but the actual SVG render still failed because its configured `rsvg-convert` delegate was absent. Executable discovery alone made the planned command look available without proving the required format path worked.
+
+**Suggested improvement:** When a plan names a media conversion command, require a tiny format-specific smoke render or verify every delegate needed by that exact input/output pair before committing to the command.
+
+**Principle:** Tool availability is an end-to-end capability check, not merely the presence of the top-level executable.
+
+Checkpoint PR5 implementation: no additional observations.
+
+Checkpoint PR5 completion: no additional observations.

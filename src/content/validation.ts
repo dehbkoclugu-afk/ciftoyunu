@@ -184,6 +184,56 @@ export function validateEditorialSource(source: EditorialSource): ContentIssue[]
       .filter((localization) => localization.status === 'approved')
       .map((localization) => [localization.questionId + ':' + localization.locale, localization]),
   );
+  const packCopyKeys = new Set<string>();
+
+  for (const copy of source.localizedPacks) {
+    const key = copy.packId + ':' + copy.locale;
+    if (packCopyKeys.has(key)) {
+      issues.push(
+        issue('error', 'duplicate_pack_copy', copy.packId, 'Pack has duplicate localized copy'),
+      );
+    }
+    packCopyKeys.add(key);
+
+    if (
+      [copy.title, copy.promise, copy.description, copy.audience, ...copy.contentWarnings].some(
+        (value) => forbiddenText.test(value),
+      )
+    ) {
+      issues.push(
+        issue(
+          'error',
+          'forbidden_pack_copy',
+          copy.packId,
+          'Pack presentation contains a forbidden placeholder or draft marker',
+        ),
+      );
+    }
+
+    for (const sampleId of copy.sampleQuestionIds) {
+      const sample = intents.get(sampleId);
+      if (!sample) {
+        issues.push(
+          issue('error', 'missing_pack_sample', copy.packId, 'Pack sample is missing: ' + sampleId),
+        );
+      }
+      if (
+        !sample ||
+        sample.status !== 'approved' ||
+        !sample.packIds.includes(copy.packId) ||
+        !approvedLocalizations.has(sampleId + ':' + copy.locale)
+      ) {
+        issues.push(
+          issue(
+            'error',
+            'invalid_pack_sample',
+            copy.packId,
+            'Pack sample is not an approved localized question: ' + sampleId,
+          ),
+        );
+      }
+    }
+  }
 
   for (const localization of source.localizations) {
     if (!intents.has(localization.questionId)) {
@@ -220,6 +270,16 @@ export function validateEditorialSource(source: EditorialSource): ContentIssue[]
   }
 
   for (const pack of source.packs.filter((candidate) => candidate.status === 'active')) {
+    if (!packCopyKeys.has(pack.id + ':' + source.locale)) {
+      issues.push(
+        issue(
+          'error',
+          'missing_pack_copy',
+          pack.id,
+          'Active pack lacks localized presentation copy',
+        ),
+      );
+    }
     const count = source.intents.filter(
       (intent) =>
         intent.status === 'approved' &&

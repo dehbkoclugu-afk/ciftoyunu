@@ -39,7 +39,7 @@ export default function PlayersScreen() {
 
   const finish = () => {
     setSaving(true);
-    void complete(rememberPlayers).then(() => router.replace('/home'));
+    void complete(rememberPlayers).then(() => router.replace('/packs'));
   };
 
   return (

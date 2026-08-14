@@ -24,11 +24,13 @@ type GameSetupActions = {
   removePlayer: (id: string) => void;
   complete: (rememberPlayers: boolean) => Promise<Player[]>;
   forgetPlayers: () => Promise<void>;
+  selectPack: (packId: string) => void;
 };
 
 export type GameSetupStore = PlayerSetupSnapshot &
   GameSetupActions & {
     persistenceFailed: boolean;
+    selectedPackId: string | null;
   };
 
 const defaultRepository = createPlayerSetupRepository(asyncStorageAdapter);
@@ -39,6 +41,7 @@ export function createGameSetupStore(repository: PlayerSetupRepository = default
     players: createDefaultPlayers('couple'),
     setupCompleted: false,
     persistenceFailed: false,
+    selectedPackId: null,
 
     hydrate: async (rememberPlayers) => {
       try {
@@ -54,6 +57,7 @@ export function createGameSetupStore(repository: PlayerSetupRepository = default
         mode,
         players: reshapePlayersForMode(mode, state.players),
         setupCompleted: false,
+        selectedPackId: null,
       })),
 
     updatePlayer: (id, patch) =>
@@ -107,6 +111,8 @@ export function createGameSetupStore(repository: PlayerSetupRepository = default
         set({ persistenceFailed: true });
       }
     },
+
+    selectPack: (selectedPackId) => set({ selectedPackId }),
   }));
 }
 

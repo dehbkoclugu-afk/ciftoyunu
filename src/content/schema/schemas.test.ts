@@ -1,4 +1,9 @@
-import { localizedQuestionSchema, questionIntentSchema, questionPackSchema } from './schemas';
+import {
+  localizedPackSchema,
+  localizedQuestionSchema,
+  questionIntentSchema,
+  questionPackSchema,
+} from './schemas';
 
 const validIntent = {
   id: 'qi_warm_start_0001',
@@ -70,5 +75,21 @@ describe('content schemas', () => {
     expect(
       localizedQuestionSchema.safeParse({ ...localization, updatedAt: 'yesterday' }).success,
     ).toBe(false);
+  });
+
+  it('requires complete localized pack presentation and two samples', () => {
+    const copy = {
+      packId: 'warm_start',
+      locale: 'en',
+      title: 'Warm Start',
+      promise: 'Ease into a better conversation.',
+      description: 'Gentle questions for settling in together.',
+      audience: 'Couples who want a relaxed start.',
+      contentWarnings: [],
+      sampleQuestionIds: ['qi_warm_start_0001', 'qi_warm_start_0002'],
+    };
+
+    expect(localizedPackSchema.safeParse(copy).success).toBe(true);
+    expect(localizedPackSchema.safeParse({ ...copy, sampleQuestionIds: [] }).success).toBe(false);
   });
 });
