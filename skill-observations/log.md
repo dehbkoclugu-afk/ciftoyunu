@@ -24,3 +24,20 @@ Observations captured during task-oriented work.
 **Principle:** A failing test only validates test-first sequencing when the harness itself is known to match the pinned dependency version.
 
 Checkpoint 6: no additional observations.
+
+### Observation 2: Validate packaged skill resources before requiring setup scripts
+
+**Status:** OPEN
+**Date:** 2026-08-14
+**Session context:** Applying a frontend quality skill to a new mobile onboarding surface
+**Skill:** impeccable
+**Type:** open-source
+**Phase/Area:** Setup
+
+**Issue:** The setup workflow requires a context script, but the installed skill package contains no scripts directory. Following the mandatory setup command therefore fails before the usable reference playbooks run.
+
+**Suggested improvement:** Make the context script part of package validation, or document a deterministic reference-only fallback when the script is absent.
+
+**Principle:** A mandatory setup step must either ship with the validated artifact or define a complete fallback that preserves the workflow.
+
+Checkpoint PR2 completion: no additional observations.
