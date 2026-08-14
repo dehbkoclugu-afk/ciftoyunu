@@ -120,7 +120,7 @@
 - Consumes: completed PR 3 tree
 - Produces: green local checks and a draft PR targeting agent/pr2-onboarding
 
-- [ ] Run Prettier, ESLint, TypeScript, Jest, Expo config, and web export.
+- [x] Run Prettier, ESLint, TypeScript, Jest, Expo Doctor in CI, and web export.
 - [x] Run content validation and generated-file checks.
-- [ ] Flush task observations.
-- [ ] Commit, publish, and open the draft PR.
+- [x] Flush task observations.
+- [x] Commit, publish, and open the draft PR.

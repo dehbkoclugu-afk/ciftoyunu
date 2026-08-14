@@ -43,3 +43,5 @@ Checkpoint 6: no additional observations.
 Checkpoint PR2 completion: no additional observations.
 
 Checkpoint PR3 core: no additional observations.
+
+Checkpoint PR3 completion: no additional observations.
