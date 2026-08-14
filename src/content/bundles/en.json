@@ -99,6 +99,76 @@
       "status": "active"
     }
   ],
+  "packCopy": [
+    {
+      "packId": "warm_start",
+      "locale": "en",
+      "title": "Warm Start",
+      "promise": "Ease into a better conversation.",
+      "description": "Low-pressure questions that help two people arrive, settle in, and notice the good details already between them.",
+      "audience": "Couples who want a relaxed beginning without forced vulnerability.",
+      "contentWarnings": [],
+      "sampleQuestionIds": [
+        "qi_warm_start_0001",
+        "qi_warm_start_0002"
+      ]
+    },
+    {
+      "packId": "laugh_together",
+      "locale": "en",
+      "title": "Laugh Together",
+      "promise": "Trade serious faces for strange stories.",
+      "description": "Playful prompts, ridiculous choices, and quick surprises designed to get the table talking and laughing.",
+      "audience": "Couples or friends who want energy before depth.",
+      "contentWarnings": [],
+      "sampleQuestionIds": [
+        "qi_laugh_together_0001",
+        "qi_laugh_together_0002"
+      ]
+    },
+    {
+      "packId": "deep_night",
+      "locale": "en",
+      "title": "Deep Night",
+      "promise": "Stay with the questions you usually pass by.",
+      "description": "Thoughtful prompts about trust, inner life, and the truths that need a little more quiet around them.",
+      "audience": "Couples ready for a slower and more open conversation.",
+      "contentWarnings": [
+        "Sensitive feelings",
+        "Past experiences"
+      ],
+      "sampleQuestionIds": [
+        "qi_deep_night_0001",
+        "qi_deep_night_0002"
+      ]
+    },
+    {
+      "packId": "appreciation",
+      "locale": "en",
+      "title": "Appreciation",
+      "promise": "Put the good things into words.",
+      "description": "Warm questions that make everyday care, overlooked strengths, and overdue thanks easier to say out loud.",
+      "audience": "Couples who want to end the night feeling seen.",
+      "contentWarnings": [],
+      "sampleQuestionIds": [
+        "qi_appreciation_0001",
+        "qi_appreciation_0002"
+      ]
+    },
+    {
+      "packId": "friends_easy",
+      "locale": "en",
+      "title": "Easy Company",
+      "promise": "Give every person a story to tell.",
+      "description": "Friendly prompts for new groups, old friends, road trips, and tables that need one good question to get moving.",
+      "audience": "Groups of two to eight friends at any level of familiarity.",
+      "contentWarnings": [],
+      "sampleQuestionIds": [
+        "qi_friends_easy_0001",
+        "qi_friends_easy_0002"
+      ]
+    }
+  ],
   "questions": [
     {
       "id": "qi_appreciation_0001",

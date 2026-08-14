@@ -6,6 +6,7 @@ import HomeScreen from '../app/home';
 import LaunchScreen from '../app/index';
 import ModeScreen from '../app/mode';
 import PlayersScreen from '../app/players';
+import PacksScreen from '../app/packs';
 
 describe('route modules', () => {
   it('exports launch, onboarding, home, and development gallery surfaces', () => {
@@ -16,6 +17,7 @@ describe('route modules', () => {
     expect(HomeScreen).toEqual(expect.any(Function));
     expect(ModeScreen).toEqual(expect.any(Function));
     expect(PlayersScreen).toEqual(expect.any(Function));
+    expect(PacksScreen).toEqual(expect.any(Function));
     expect(DevGalleryScreen).toEqual(expect.any(Function));
   });
 });

@@ -20,6 +20,8 @@ describe('content build', () => {
 
     expect(first).toEqual(second);
     expect(first.bundle.questions).toHaveLength(50);
+    expect(first.bundle.packCopy).toHaveLength(5);
+    expect(first.bundle.packCopy[0]?.title).toBe('Warm Start');
     expect(first.manifest.locales.en?.questionCount).toBe(50);
     expect(first.bundleJson).not.toContain('editorialNotes');
     expect(first.bundleJson).not.toContain('nativeReviewerId');

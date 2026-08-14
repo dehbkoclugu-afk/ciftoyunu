@@ -66,6 +66,22 @@ export function buildRuntimeArtifacts(source: EditorialSource): RuntimeArtifacts
     packs: source.packs
       .filter((pack) => pack.status === 'active' && pack.allowedLocales.includes(source.locale))
       .sort((left, right) => left.sortOrder - right.sortOrder || left.id.localeCompare(right.id)),
+    packCopy: source.localizedPacks
+      .filter(
+        (copy) =>
+          copy.locale === source.locale &&
+          source.packs.some(
+            (pack) =>
+              pack.id === copy.packId &&
+              pack.status === 'active' &&
+              pack.allowedLocales.includes(source.locale),
+          ),
+      )
+      .sort((left, right) => {
+        const leftOrder = source.packs.find((pack) => pack.id === left.packId)?.sortOrder ?? 0;
+        const rightOrder = source.packs.find((pack) => pack.id === right.packId)?.sortOrder ?? 0;
+        return leftOrder - rightOrder || left.packId.localeCompare(right.packId);
+      }),
     questions,
   });
   const bundleJson = stableJson(bundle);

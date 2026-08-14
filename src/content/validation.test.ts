@@ -24,6 +24,18 @@ function createSource(): EditorialSource {
         status: 'active',
       },
     ],
+    localizedPacks: [
+      {
+        packId: 'warm_start',
+        locale: 'en',
+        title: 'Warm Start',
+        promise: 'Ease into a better conversation.',
+        description: 'Gentle questions for settling in together.',
+        audience: 'Couples who want a relaxed start.',
+        contentWarnings: [],
+        sampleQuestionIds: ['qi_warm_start_0001', 'qi_warm_start_0001'],
+      },
+    ],
     intents: [
       {
         id: 'qi_warm_start_0001',
@@ -103,6 +115,35 @@ describe('validateEditorialSource', () => {
         'missing_adult_safety_tags',
         'missing_safety_review',
       ]),
+    );
+  });
+
+  it('requires one localized presentation with valid pack samples', () => {
+    const missing = createSource();
+    missing.localizedPacks = [];
+    expect(validateEditorialSource(missing).map((issue) => issue.code)).toContain(
+      'missing_pack_copy',
+    );
+
+    const duplicate = createSource();
+    duplicate.localizedPacks.push({ ...duplicate.localizedPacks[0]! });
+    expect(validateEditorialSource(duplicate).map((issue) => issue.code)).toContain(
+      'duplicate_pack_copy',
+    );
+
+    const invalid = createSource();
+    invalid.localizedPacks[0]!.sampleQuestionIds = ['qi_warm_start_0001', 'qi_missing_9999'];
+    expect(validateEditorialSource(invalid).map((issue) => issue.code)).toEqual(
+      expect.arrayContaining(['missing_pack_sample', 'invalid_pack_sample']),
+    );
+  });
+
+  it('rejects draft markers in localized pack presentation', () => {
+    const source = createSource();
+    source.localizedPacks[0]!.title = 'TODO pack';
+
+    expect(validateEditorialSource(source).map((issue) => issue.code)).toContain(
+      'forbidden_pack_copy',
     );
   });
 });

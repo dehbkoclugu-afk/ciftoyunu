@@ -32,6 +32,7 @@ describe('mode and player setup screens', () => {
       players: createDefaultPlayers('couple'),
       setupCompleted: false,
       persistenceFailed: false,
+      selectedPackId: null,
     });
     useSettingsStore.setState({ ...DEFAULT_SETTINGS, persistenceFailed: false });
   });
@@ -75,12 +76,12 @@ describe('mode and player setup screens', () => {
     expect(screen.getByRole('button', { name: 'Save players' })).not.toBeDisabled();
   });
 
-  it('completes setup and returns home even without saved names', async () => {
+  it('completes setup and opens the pack library even without saved names', async () => {
     const screen = await renderWithTheme(<PlayersScreen />);
 
     await fireEvent.press(screen.getByRole('button', { name: 'Save players' }));
 
-    await waitFor(() => expect(mockReplace).toHaveBeenCalledWith('/home'));
+    await waitFor(() => expect(mockReplace).toHaveBeenCalledWith('/packs'));
     expect(useGameSetupStore.getState().setupCompleted).toBe(true);
   });
 });

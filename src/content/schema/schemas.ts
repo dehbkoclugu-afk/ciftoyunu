@@ -64,6 +64,19 @@ export const localizedQuestionSchema = z
   })
   .strict();
 
+export const localizedPackSchema = z
+  .object({
+    packId: stablePackId,
+    locale: supportedLocaleSchema,
+    title: z.string().trim().min(1),
+    promise: z.string().trim().min(1),
+    description: z.string().trim().min(1),
+    audience: z.string().trim().min(1),
+    contentWarnings: z.array(z.string().trim().min(1)),
+    sampleQuestionIds: z.tuple([stableQuestionId, stableQuestionId]),
+  })
+  .strict();
+
 export const questionPackSchema = z
   .object({
     id: stablePackId,
@@ -93,6 +106,7 @@ export const editorialSourceSchema = z
     approvedAt: z.string().datetime({ offset: true }),
     locale: supportedLocaleSchema,
     packs: z.array(questionPackSchema).min(1),
+    localizedPacks: z.array(localizedPackSchema).min(1),
     intents: z.array(questionIntentSchema).min(1),
     localizations: z.array(localizedQuestionSchema).min(1),
   })
@@ -117,6 +131,7 @@ export const contentBundleSchema = z
     contentVersion: z.string().regex(/^[0-9]{4}\.[0-9]{2}\.[0-9]+$/),
     locale: supportedLocaleSchema,
     packs: z.array(questionPackSchema),
+    packCopy: z.array(localizedPackSchema),
     questions: z.array(runtimeQuestionSchema),
   })
   .strict();
@@ -141,6 +156,7 @@ export const contentManifestSchema = z
 
 export type QuestionIntent = z.infer<typeof questionIntentSchema>;
 export type LocalizedQuestion = z.infer<typeof localizedQuestionSchema>;
+export type LocalizedPack = z.infer<typeof localizedPackSchema>;
 export type QuestionPack = z.infer<typeof questionPackSchema>;
 export type EditorialSource = z.infer<typeof editorialSourceSchema>;
 export type RuntimeQuestion = z.infer<typeof runtimeQuestionSchema>;
