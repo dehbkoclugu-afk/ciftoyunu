@@ -15,6 +15,7 @@ import { categoryColors, useAppTheme } from '@/design';
 import { resolvePlayers } from '@/features/player-setup/playerSetup';
 import { getLocaleOption } from '@/i18n';
 import { useGameSetupStore } from '@/state/gameSetupStore';
+import { useSessionStore } from '@/state/sessionStore';
 import { useSettingsStore } from '@/state/settingsStore';
 
 const packPresentation: Record<string, { label: string; color: string }> = {
@@ -32,6 +33,7 @@ export default function HomeScreen() {
   const mode = useGameSetupStore((state) => state.mode);
   const players = useGameSetupStore((state) => state.players);
   const setupCompleted = useGameSetupStore((state) => state.setupCompleted);
+  const activeSession = useSessionStore((state) => state.activeSession);
   const compact = width < 380;
   const bundle = loadEmbeddedContent(locale);
   const question = bundle?.questions[0];
@@ -83,6 +85,38 @@ export default function HomeScreen() {
               {displayNames}
             </AppText>
           </View>
+        </View>
+      ) : null}
+
+      {activeSession ? (
+        <View
+          style={[
+            styles.resume,
+            {
+              backgroundColor: theme.colors.primary,
+              borderRadius: theme.radius.button,
+            },
+          ]}
+        >
+          <View style={styles.resumeCopy}>
+            <AppText variant="button" style={{ color: theme.colors.onPrimary }}>
+              {activeSession.completedAt
+                ? 'Your recap is ready'
+                : 'Your card is still on the table'}
+            </AppText>
+            <AppText variant="bodySmall" style={{ color: theme.colors.onPrimary }}>
+              {activeSession.packTitle}
+            </AppText>
+          </View>
+          <AppButton
+            label={
+              activeSession.completedAt
+                ? `View ${activeSession.packTitle} recap`
+                : `Continue ${activeSession.packTitle}`
+            }
+            variant="secondary"
+            onPress={() => router.push(activeSession.completedAt ? '/recap' : '/play')}
+          />
         </View>
       ) : null}
 
@@ -151,9 +185,15 @@ export default function HomeScreen() {
 
       <View style={styles.actions}>
         <AppButton
-          label="Play together"
+          label={activeSession ? 'Start a new table' : 'Play together'}
+          variant={activeSession ? 'secondary' : 'primary'}
           accessibilityHint="Choose Couple or Friends mode"
           onPress={() => router.push('/mode')}
+        />
+        <AppButton
+          label="Saved questions"
+          variant="ghost"
+          onPress={() => router.push('/favorites')}
         />
         <AppText variant="caption" tone="muted" style={styles.centered}>
           No account. No answers saved. Passing is always allowed.
@@ -179,6 +219,8 @@ const styles = StyleSheet.create({
   },
   readyMark: { width: 12, height: 36, borderRadius: 6 },
   readyCopy: { flex: 1, gap: 2 },
+  resume: { marginTop: 18, padding: 14, gap: 12 },
+  resumeCopy: { gap: 2 },
   cardStage: { minHeight: 320, width: '100%', maxWidth: 560, alignSelf: 'center' },
   backCard: { position: 'absolute', inset: 12 },
   questionCard: {

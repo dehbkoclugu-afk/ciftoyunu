@@ -5,6 +5,7 @@ import { ThemeProvider } from '@/design/ThemeProvider';
 import { createDefaultPlayers } from '@/features/player-setup/playerSetup';
 import { DEFAULT_SETTINGS } from '@/storage/migrations';
 import { useGameSetupStore } from '@/state/gameSetupStore';
+import { useSessionStore } from '@/state/sessionStore';
 import { useSettingsStore } from '@/state/settingsStore';
 
 const mockPush = jest.fn();
@@ -23,6 +24,7 @@ describe('HomeScreen', () => {
       setupCompleted: false,
       persistenceFailed: false,
     });
+    useSessionStore.setState({ activeSession: null, favoriteIds: [] });
   });
 
   it('uses real embedded content and keeps one primary Play action', async () => {
@@ -57,5 +59,45 @@ describe('HomeScreen', () => {
 
     expect(screen.getByText('Friends ready')).toBeTruthy();
     expect(screen.getByText('Maya & Noah')).toBeTruthy();
+  });
+
+  it('resumes unfinished sessions', async () => {
+    useSessionStore.setState({
+      activeSession: {
+        id: 'session-home',
+        packTitle: 'Warm Start',
+        completedAt: undefined,
+      } as never,
+    });
+    const unfinished = await render(
+      <ThemeProvider forcedScheme="light">
+        <HomeScreen />
+      </ThemeProvider>,
+    );
+    await fireEvent.press(unfinished.getByRole('button', { name: 'Continue Warm Start' }));
+    expect(mockPush).toHaveBeenCalledWith('/play');
+  });
+
+  it('opens completed recaps', async () => {
+    useSessionStore.setState({
+      activeSession: { id: 'session-home', packTitle: 'Warm Start', completedAt: 5_000 } as never,
+    });
+    const completed = await render(
+      <ThemeProvider forcedScheme="light">
+        <HomeScreen />
+      </ThemeProvider>,
+    );
+    await fireEvent.press(completed.getByRole('button', { name: 'View Warm Start recap' }));
+    expect(mockPush).toHaveBeenCalledWith('/recap');
+  });
+
+  it('keeps saved questions reachable', async () => {
+    const screen = await render(
+      <ThemeProvider forcedScheme="dark">
+        <HomeScreen />
+      </ThemeProvider>,
+    );
+    await fireEvent.press(screen.getByRole('button', { name: 'Saved questions' }));
+    expect(mockPush).toHaveBeenCalledWith('/favorites');
   });
 });

@@ -54,6 +54,7 @@ export default function PacksScreen() {
   const choose = (packId: string) => {
     selectPack(packId);
     setDetail(null);
+    router.push('/session-setup');
   };
 
   if (!bundle) {
