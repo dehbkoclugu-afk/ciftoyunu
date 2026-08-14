@@ -1,0 +1,1478 @@
+{
+  "schemaVersion": 1,
+  "contentVersion": "2026.08.1",
+  "locale": "en",
+  "packs": [
+    {
+      "id": "warm_start",
+      "mode": "couple",
+      "category": "warm-up",
+      "premium": false,
+      "seasonal": false,
+      "requiredAge": 13,
+      "minimumQuestions": 10,
+      "intensityRange": [
+        1,
+        2
+      ],
+      "allowedLocales": [
+        "en"
+      ],
+      "artworkId": "art_warm_start",
+      "sortOrder": 1,
+      "status": "active"
+    },
+    {
+      "id": "laugh_together",
+      "mode": "both",
+      "category": "fun",
+      "premium": false,
+      "seasonal": false,
+      "requiredAge": 13,
+      "minimumQuestions": 10,
+      "intensityRange": [
+        1,
+        2
+      ],
+      "allowedLocales": [
+        "en"
+      ],
+      "artworkId": "art_laugh_together",
+      "sortOrder": 2,
+      "status": "active"
+    },
+    {
+      "id": "deep_night",
+      "mode": "couple",
+      "category": "deep",
+      "premium": true,
+      "seasonal": false,
+      "requiredAge": 16,
+      "minimumQuestions": 10,
+      "intensityRange": [
+        3,
+        4
+      ],
+      "allowedLocales": [
+        "en"
+      ],
+      "artworkId": "art_deep_night",
+      "sortOrder": 3,
+      "status": "active"
+    },
+    {
+      "id": "appreciation",
+      "mode": "couple",
+      "category": "appreciation",
+      "premium": false,
+      "seasonal": false,
+      "requiredAge": 13,
+      "minimumQuestions": 10,
+      "intensityRange": [
+        1,
+        3
+      ],
+      "allowedLocales": [
+        "en"
+      ],
+      "artworkId": "art_appreciation",
+      "sortOrder": 4,
+      "status": "active"
+    },
+    {
+      "id": "friends_easy",
+      "mode": "friends",
+      "category": "friends",
+      "premium": false,
+      "seasonal": false,
+      "requiredAge": 13,
+      "minimumQuestions": 10,
+      "intensityRange": [
+        1,
+        2
+      ],
+      "allowedLocales": [
+        "en"
+      ],
+      "artworkId": "art_friends_easy",
+      "sortOrder": 5,
+      "status": "active"
+    }
+  ],
+  "questions": [
+    {
+      "id": "qi_appreciation_0001",
+      "intentKey": "care.small_action",
+      "mode": [
+        "couple"
+      ],
+      "packIds": [
+        "appreciation"
+      ],
+      "topicTags": [
+        "affection",
+        "daily-life"
+      ],
+      "relationshipStages": [
+        "any"
+      ],
+      "intensity": 1,
+      "maturity": "general",
+      "interactionType": "open",
+      "starter": "random",
+      "safetyTags": [],
+      "sourceClass": "original",
+      "version": 1,
+      "locale": "en",
+      "text": "What small thing I do makes you feel cared for?",
+      "updatedAt": "2026-08-14T00:00:00.000Z"
+    },
+    {
+      "id": "qi_appreciation_0002",
+      "intentKey": "quality.rely_on",
+      "mode": [
+        "couple"
+      ],
+      "packIds": [
+        "appreciation"
+      ],
+      "topicTags": [
+        "trust",
+        "personality"
+      ],
+      "relationshipStages": [
+        "any"
+      ],
+      "intensity": 2,
+      "maturity": "general",
+      "interactionType": "predict",
+      "starter": "both",
+      "safetyTags": [],
+      "sourceClass": "original",
+      "version": 1,
+      "locale": "en",
+      "text": "Which quality of mine do you rely on more than I probably realize?",
+      "updatedAt": "2026-08-14T00:00:00.000Z"
+    },
+    {
+      "id": "qi_appreciation_0003",
+      "intentKey": "memory.proud_together",
+      "mode": [
+        "couple"
+      ],
+      "packIds": [
+        "appreciation"
+      ],
+      "topicTags": [
+        "memories",
+        "repair"
+      ],
+      "relationshipStages": [
+        "any"
+      ],
+      "intensity": 3,
+      "maturity": "general",
+      "interactionType": "memory",
+      "starter": "both",
+      "safetyTags": [],
+      "sourceClass": "original",
+      "version": 1,
+      "locale": "en",
+      "text": "Which moment made you feel proud of how we handled something together?",
+      "updatedAt": "2026-08-14T00:00:00.000Z"
+    },
+    {
+      "id": "qi_appreciation_0004",
+      "intentKey": "self.favorite_version",
+      "mode": [
+        "couple"
+      ],
+      "packIds": [
+        "appreciation"
+      ],
+      "topicTags": [
+        "personality",
+        "affection"
+      ],
+      "relationshipStages": [
+        "any"
+      ],
+      "intensity": 2,
+      "maturity": "general",
+      "interactionType": "open",
+      "starter": "random",
+      "safetyTags": [],
+      "sourceClass": "original",
+      "version": 1,
+      "locale": "en",
+      "text": "What version of yourself appears more often when we are together?",
+      "updatedAt": "2026-08-14T00:00:00.000Z"
+    },
+    {
+      "id": "qi_appreciation_0005",
+      "intentKey": "thanks.overdue",
+      "mode": [
+        "couple"
+      ],
+      "packIds": [
+        "appreciation"
+      ],
+      "topicTags": [
+        "affection"
+      ],
+      "relationshipStages": [
+        "any"
+      ],
+      "intensity": 2,
+      "maturity": "general",
+      "interactionType": "open",
+      "starter": "both",
+      "safetyTags": [],
+      "sourceClass": "original",
+      "version": 1,
+      "locale": "en",
+      "text": "What thank-you between us is slightly overdue?",
+      "updatedAt": "2026-08-14T00:00:00.000Z"
+    },
+    {
+      "id": "qi_appreciation_0006",
+      "intentKey": "strength.borrow",
+      "mode": [
+        "couple"
+      ],
+      "packIds": [
+        "appreciation"
+      ],
+      "topicTags": [
+        "personality",
+        "affection"
+      ],
+      "relationshipStages": [
+        "any"
+      ],
+      "intensity": 2,
+      "maturity": "general",
+      "interactionType": "choice",
+      "starter": "both",
+      "safetyTags": [],
+      "sourceClass": "original",
+      "version": 1,
+      "locale": "en",
+      "text": "Which of my strengths would you borrow for a difficult day?",
+      "updatedAt": "2026-08-14T00:00:00.000Z"
+    },
+    {
+      "id": "qi_appreciation_0007",
+      "intentKey": "detail.missed",
+      "mode": [
+        "couple"
+      ],
+      "packIds": [
+        "appreciation"
+      ],
+      "topicTags": [
+        "personality"
+      ],
+      "relationshipStages": [
+        "any"
+      ],
+      "intensity": 2,
+      "maturity": "general",
+      "interactionType": "predict",
+      "starter": "random",
+      "safetyTags": [],
+      "sourceClass": "original",
+      "version": 1,
+      "locale": "en",
+      "text": "What thoughtful detail about me do you think other people often miss?",
+      "updatedAt": "2026-08-14T00:00:00.000Z"
+    },
+    {
+      "id": "qi_appreciation_0008",
+      "intentKey": "ritual.keep_forever",
+      "mode": [
+        "couple"
+      ],
+      "packIds": [
+        "appreciation"
+      ],
+      "topicTags": [
+        "habits",
+        "future"
+      ],
+      "relationshipStages": [
+        "any"
+      ],
+      "intensity": 3,
+      "maturity": "general",
+      "interactionType": "choice",
+      "starter": "both",
+      "safetyTags": [],
+      "sourceClass": "original",
+      "version": 1,
+      "locale": "en",
+      "text": "Which tiny ritual of ours would you protect even during a very busy year?",
+      "updatedAt": "2026-08-14T00:00:00.000Z"
+    },
+    {
+      "id": "qi_appreciation_0009",
+      "intentKey": "recent.smile",
+      "mode": [
+        "couple"
+      ],
+      "packIds": [
+        "appreciation"
+      ],
+      "topicTags": [
+        "affection",
+        "memories"
+      ],
+      "relationshipStages": [
+        "any"
+      ],
+      "intensity": 1,
+      "maturity": "general",
+      "interactionType": "memory",
+      "starter": "both",
+      "safetyTags": [],
+      "sourceClass": "original",
+      "version": 1,
+      "locale": "en",
+      "text": "What did I do recently that made you smile after the moment had passed?",
+      "updatedAt": "2026-08-14T00:00:00.000Z"
+    },
+    {
+      "id": "qi_appreciation_0010",
+      "intentKey": "sentence.leave_today",
+      "mode": [
+        "couple"
+      ],
+      "packIds": [
+        "appreciation"
+      ],
+      "topicTags": [
+        "affection",
+        "repair"
+      ],
+      "relationshipStages": [
+        "any"
+      ],
+      "intensity": 2,
+      "maturity": "general",
+      "interactionType": "rapid",
+      "starter": "random",
+      "safetyTags": [],
+      "sourceClass": "original",
+      "version": 1,
+      "locale": "en",
+      "text": "What one kind sentence would you like me to carry into tomorrow?",
+      "updatedAt": "2026-08-14T00:00:00.000Z"
+    },
+    {
+      "id": "qi_deep_night_0001",
+      "intentKey": "understanding.hard_to_explain",
+      "mode": [
+        "couple"
+      ],
+      "packIds": [
+        "deep_night"
+      ],
+      "topicTags": [
+        "values",
+        "affection"
+      ],
+      "relationshipStages": [
+        "any"
+      ],
+      "intensity": 3,
+      "maturity": "general",
+      "interactionType": "open",
+      "starter": "random",
+      "safetyTags": [
+        "sensitive"
+      ],
+      "sourceClass": "original",
+      "version": 1,
+      "locale": "en",
+      "text": "What part of feeling understood is hardest for you to explain?",
+      "updatedAt": "2026-08-14T00:00:00.000Z"
+    },
+    {
+      "id": "qi_deep_night_0002",
+      "intentKey": "expectations.release",
+      "mode": [
+        "couple"
+      ],
+      "packIds": [
+        "deep_night"
+      ],
+      "topicTags": [
+        "values",
+        "future"
+      ],
+      "relationshipStages": [
+        "any"
+      ],
+      "intensity": 4,
+      "maturity": "general",
+      "interactionType": "open",
+      "starter": "both",
+      "safetyTags": [
+        "sensitive"
+      ],
+      "sourceClass": "original",
+      "version": 1,
+      "locale": "en",
+      "text": "Which expectation about your life are you ready to stop carrying?",
+      "updatedAt": "2026-08-14T00:00:00.000Z"
+    },
+    {
+      "id": "qi_deep_night_0003",
+      "intentKey": "seen.most_yourself",
+      "mode": [
+        "couple"
+      ],
+      "packIds": [
+        "deep_night"
+      ],
+      "topicTags": [
+        "personality",
+        "affection"
+      ],
+      "relationshipStages": [
+        "any"
+      ],
+      "intensity": 3,
+      "maturity": "general",
+      "interactionType": "memory",
+      "starter": "both",
+      "safetyTags": [
+        "sensitive"
+      ],
+      "sourceClass": "original",
+      "version": 1,
+      "locale": "en",
+      "text": "When do you feel most like yourself with me?",
+      "updatedAt": "2026-08-14T00:00:00.000Z"
+    },
+    {
+      "id": "qi_deep_night_0004",
+      "intentKey": "belief.changed",
+      "mode": [
+        "couple"
+      ],
+      "packIds": [
+        "deep_night"
+      ],
+      "topicTags": [
+        "values",
+        "memories"
+      ],
+      "relationshipStages": [
+        "any"
+      ],
+      "intensity": 3,
+      "maturity": "general",
+      "interactionType": "memory",
+      "starter": "random",
+      "safetyTags": [
+        "sensitive"
+      ],
+      "sourceClass": "original",
+      "version": 1,
+      "locale": "en",
+      "text": "What belief about relationships has changed most for you over time?",
+      "updatedAt": "2026-08-14T00:00:00.000Z"
+    },
+    {
+      "id": "qi_deep_night_0005",
+      "intentKey": "support.right_kind",
+      "mode": [
+        "couple"
+      ],
+      "packIds": [
+        "deep_night"
+      ],
+      "topicTags": [
+        "repair",
+        "affection"
+      ],
+      "relationshipStages": [
+        "any"
+      ],
+      "intensity": 4,
+      "maturity": "general",
+      "interactionType": "open",
+      "starter": "both",
+      "safetyTags": [
+        "sensitive"
+      ],
+      "sourceClass": "original",
+      "version": 1,
+      "locale": "en",
+      "text": "When life feels heavy, what kind of support helps without feeling like pressure?",
+      "updatedAt": "2026-08-14T00:00:00.000Z"
+    },
+    {
+      "id": "qi_deep_night_0006",
+      "intentKey": "fear.misread",
+      "mode": [
+        "couple"
+      ],
+      "packIds": [
+        "deep_night"
+      ],
+      "topicTags": [
+        "trust",
+        "privacy"
+      ],
+      "relationshipStages": [
+        "any"
+      ],
+      "intensity": 4,
+      "maturity": "general",
+      "interactionType": "open",
+      "starter": "both",
+      "safetyTags": [
+        "sensitive"
+      ],
+      "sourceClass": "original",
+      "version": 1,
+      "locale": "en",
+      "text": "Which fear of yours is easiest for other people to misread?",
+      "updatedAt": "2026-08-14T00:00:00.000Z"
+    },
+    {
+      "id": "qi_deep_night_0007",
+      "intentKey": "boundary.respected",
+      "mode": [
+        "couple"
+      ],
+      "packIds": [
+        "deep_night"
+      ],
+      "topicTags": [
+        "privacy",
+        "trust"
+      ],
+      "relationshipStages": [
+        "any"
+      ],
+      "intensity": 4,
+      "maturity": "general",
+      "interactionType": "open",
+      "starter": "random",
+      "safetyTags": [
+        "sensitive"
+      ],
+      "sourceClass": "original",
+      "version": 1,
+      "locale": "en",
+      "text": "What boundary makes it easier for you to stay close rather than pull away?",
+      "updatedAt": "2026-08-14T00:00:00.000Z"
+    },
+    {
+      "id": "qi_deep_night_0008",
+      "intentKey": "question.unasked",
+      "mode": [
+        "couple"
+      ],
+      "packIds": [
+        "deep_night"
+      ],
+      "topicTags": [
+        "personality",
+        "values"
+      ],
+      "relationshipStages": [
+        "any"
+      ],
+      "intensity": 3,
+      "maturity": "general",
+      "interactionType": "open",
+      "starter": "both",
+      "safetyTags": [
+        "sensitive"
+      ],
+      "sourceClass": "original",
+      "version": 1,
+      "locale": "en",
+      "text": "What do you wish people asked you about more often?",
+      "updatedAt": "2026-08-14T00:00:00.000Z"
+    },
+    {
+      "id": "qi_deep_night_0009",
+      "intentKey": "courage.unnoticed",
+      "mode": [
+        "couple"
+      ],
+      "packIds": [
+        "deep_night"
+      ],
+      "topicTags": [
+        "memories",
+        "values"
+      ],
+      "relationshipStages": [
+        "any"
+      ],
+      "intensity": 4,
+      "maturity": "general",
+      "interactionType": "memory",
+      "starter": "both",
+      "safetyTags": [
+        "sensitive"
+      ],
+      "sourceClass": "original",
+      "version": 1,
+      "locale": "en",
+      "text": "When have you been brave in a way that almost nobody noticed?",
+      "updatedAt": "2026-08-14T00:00:00.000Z"
+    },
+    {
+      "id": "qi_deep_night_0010",
+      "intentKey": "safety.everyday_shape",
+      "mode": [
+        "couple"
+      ],
+      "packIds": [
+        "deep_night"
+      ],
+      "topicTags": [
+        "trust",
+        "daily-life"
+      ],
+      "relationshipStages": [
+        "any"
+      ],
+      "intensity": 4,
+      "maturity": "general",
+      "interactionType": "scenario",
+      "starter": "random",
+      "safetyTags": [
+        "sensitive"
+      ],
+      "sourceClass": "original",
+      "version": 1,
+      "locale": "en",
+      "text": "What would emotional safety look like in an ordinary week for us?",
+      "updatedAt": "2026-08-14T00:00:00.000Z"
+    },
+    {
+      "id": "qi_friends_easy_0001",
+      "intentKey": "group.show_winner",
+      "mode": [
+        "friends"
+      ],
+      "packIds": [
+        "friends_easy"
+      ],
+      "topicTags": [
+        "friends",
+        "humor"
+      ],
+      "relationshipStages": [
+        "any"
+      ],
+      "intensity": 1,
+      "maturity": "general",
+      "interactionType": "predict",
+      "starter": "random",
+      "safetyTags": [],
+      "sourceClass": "original",
+      "version": 1,
+      "locale": "en",
+      "text": "Who in this group would thrive most on a reality show, and what kind?",
+      "updatedAt": "2026-08-14T00:00:00.000Z"
+    },
+    {
+      "id": "qi_friends_easy_0002",
+      "intentKey": "cheap.plan",
+      "mode": [
+        "friends"
+      ],
+      "packIds": [
+        "friends_easy"
+      ],
+      "topicTags": [
+        "friends",
+        "daily-life"
+      ],
+      "relationshipStages": [
+        "any"
+      ],
+      "intensity": 1,
+      "maturity": "general",
+      "interactionType": "open",
+      "starter": "both",
+      "safetyTags": [],
+      "sourceClass": "original",
+      "version": 1,
+      "locale": "en",
+      "text": "What inexpensive plan should this group try at least once?",
+      "updatedAt": "2026-08-14T00:00:00.000Z"
+    },
+    {
+      "id": "qi_friends_easy_0003",
+      "intentKey": "first_impression.change",
+      "mode": [
+        "friends"
+      ],
+      "packIds": [
+        "friends_easy"
+      ],
+      "topicTags": [
+        "friends",
+        "memories"
+      ],
+      "relationshipStages": [
+        "any"
+      ],
+      "intensity": 2,
+      "maturity": "general",
+      "interactionType": "memory",
+      "starter": "both",
+      "safetyTags": [],
+      "sourceClass": "original",
+      "version": 1,
+      "locale": "en",
+      "text": "Whose first impression changed the most after you got to know them?",
+      "updatedAt": "2026-08-14T00:00:00.000Z"
+    },
+    {
+      "id": "qi_friends_easy_0004",
+      "intentKey": "road_trip_roles",
+      "mode": [
+        "friends"
+      ],
+      "packIds": [
+        "friends_easy"
+      ],
+      "topicTags": [
+        "friends",
+        "humor"
+      ],
+      "relationshipStages": [
+        "any"
+      ],
+      "intensity": 1,
+      "maturity": "general",
+      "interactionType": "rank",
+      "starter": "random",
+      "safetyTags": [],
+      "sourceClass": "original",
+      "version": 1,
+      "locale": "en",
+      "text": "On a road trip, who handles music, directions, snacks, and morale?",
+      "updatedAt": "2026-08-14T00:00:00.000Z"
+    },
+    {
+      "id": "qi_friends_easy_0005",
+      "intentKey": "skill.teach_group",
+      "mode": [
+        "friends"
+      ],
+      "packIds": [
+        "friends_easy"
+      ],
+      "topicTags": [
+        "friends",
+        "personality"
+      ],
+      "relationshipStages": [
+        "any"
+      ],
+      "intensity": 1,
+      "maturity": "general",
+      "interactionType": "open",
+      "starter": "both",
+      "safetyTags": [],
+      "sourceClass": "original",
+      "version": 1,
+      "locale": "en",
+      "text": "What skill could you teach everyone here in fifteen minutes?",
+      "updatedAt": "2026-08-14T00:00:00.000Z"
+    },
+    {
+      "id": "qi_friends_easy_0006",
+      "intentKey": "museum.personal",
+      "mode": [
+        "friends"
+      ],
+      "packIds": [
+        "friends_easy"
+      ],
+      "topicTags": [
+        "friends",
+        "memories"
+      ],
+      "relationshipStages": [
+        "any"
+      ],
+      "intensity": 2,
+      "maturity": "general",
+      "interactionType": "scenario",
+      "starter": "both",
+      "safetyTags": [],
+      "sourceClass": "original",
+      "version": 1,
+      "locale": "en",
+      "text": "If each person had one object in a museum about their life, what would it be?",
+      "updatedAt": "2026-08-14T00:00:00.000Z"
+    },
+    {
+      "id": "qi_friends_easy_0007",
+      "intentKey": "group.chat_title",
+      "mode": [
+        "friends"
+      ],
+      "packIds": [
+        "friends_easy"
+      ],
+      "topicTags": [
+        "friends",
+        "humor",
+        "social-media"
+      ],
+      "relationshipStages": [
+        "any"
+      ],
+      "intensity": 1,
+      "maturity": "general",
+      "interactionType": "rapid",
+      "starter": "random",
+      "safetyTags": [],
+      "sourceClass": "original",
+      "version": 1,
+      "locale": "en",
+      "text": "What honest title would you give this group's chat history?",
+      "updatedAt": "2026-08-14T00:00:00.000Z"
+    },
+    {
+      "id": "qi_friends_easy_0008",
+      "intentKey": "weekend.vote",
+      "mode": [
+        "friends"
+      ],
+      "packIds": [
+        "friends_easy"
+      ],
+      "topicTags": [
+        "friends",
+        "daily-life"
+      ],
+      "relationshipStages": [
+        "any"
+      ],
+      "intensity": 1,
+      "maturity": "general",
+      "interactionType": "choice",
+      "starter": "both",
+      "safetyTags": [],
+      "sourceClass": "original",
+      "version": 1,
+      "locale": "en",
+      "text": "Would this group choose a quiet cabin or a crowded city weekend, and why?",
+      "updatedAt": "2026-08-14T00:00:00.000Z"
+    },
+    {
+      "id": "qi_friends_easy_0009",
+      "intentKey": "unexpected.expert",
+      "mode": [
+        "friends"
+      ],
+      "packIds": [
+        "friends_easy"
+      ],
+      "topicTags": [
+        "friends",
+        "personality"
+      ],
+      "relationshipStages": [
+        "any"
+      ],
+      "intensity": 2,
+      "maturity": "general",
+      "interactionType": "predict",
+      "starter": "both",
+      "safetyTags": [],
+      "sourceClass": "original",
+      "version": 1,
+      "locale": "en",
+      "text": "What oddly specific topic could someone here give a great talk about?",
+      "updatedAt": "2026-08-14T00:00:00.000Z"
+    },
+    {
+      "id": "qi_friends_easy_0010",
+      "intentKey": "memory.replay",
+      "mode": [
+        "friends"
+      ],
+      "packIds": [
+        "friends_easy"
+      ],
+      "topicTags": [
+        "friends",
+        "memories"
+      ],
+      "relationshipStages": [
+        "any"
+      ],
+      "intensity": 2,
+      "maturity": "general",
+      "interactionType": "memory",
+      "starter": "random",
+      "safetyTags": [],
+      "sourceClass": "original",
+      "version": 1,
+      "locale": "en",
+      "text": "Which day with friends would you happily replay exactly as it happened?",
+      "updatedAt": "2026-08-14T00:00:00.000Z"
+    },
+    {
+      "id": "qi_laugh_together_0001",
+      "intentKey": "reviews.five_star",
+      "mode": [
+        "couple",
+        "friends"
+      ],
+      "packIds": [
+        "laugh_together"
+      ],
+      "topicTags": [
+        "humor"
+      ],
+      "relationshipStages": [
+        "any"
+      ],
+      "intensity": 2,
+      "maturity": "general",
+      "interactionType": "scenario",
+      "starter": "random",
+      "safetyTags": [],
+      "sourceClass": "original",
+      "version": 1,
+      "locale": "en",
+      "text": "If our dynamic had customer reviews, what would the funniest five-star review say?",
+      "updatedAt": "2026-08-14T00:00:00.000Z"
+    },
+    {
+      "id": "qi_laugh_together_0002",
+      "intentKey": "objects.bad_roommate",
+      "mode": [
+        "couple",
+        "friends"
+      ],
+      "packIds": [
+        "laugh_together"
+      ],
+      "topicTags": [
+        "humor",
+        "home"
+      ],
+      "relationshipStages": [
+        "any"
+      ],
+      "intensity": 1,
+      "maturity": "general",
+      "interactionType": "choice",
+      "starter": "both",
+      "safetyTags": [],
+      "sourceClass": "original",
+      "version": 1,
+      "locale": "en",
+      "text": "Which household object would make the worst roommate, and why?",
+      "updatedAt": "2026-08-14T00:00:00.000Z"
+    },
+    {
+      "id": "qi_laugh_together_0003",
+      "intentKey": "game_show.roles",
+      "mode": [
+        "couple",
+        "friends"
+      ],
+      "packIds": [
+        "laugh_together"
+      ],
+      "topicTags": [
+        "humor",
+        "personality"
+      ],
+      "relationshipStages": [
+        "any"
+      ],
+      "intensity": 2,
+      "maturity": "general",
+      "interactionType": "predict",
+      "starter": "both",
+      "safetyTags": [],
+      "sourceClass": "original",
+      "version": 1,
+      "locale": "en",
+      "text": "If we competed on a game show together, what role would each of us play?",
+      "updatedAt": "2026-08-14T00:00:00.000Z"
+    },
+    {
+      "id": "qi_laugh_together_0004",
+      "intentKey": "fictional.bad_job",
+      "mode": [
+        "couple",
+        "friends"
+      ],
+      "packIds": [
+        "laugh_together"
+      ],
+      "topicTags": [
+        "humor",
+        "career"
+      ],
+      "relationshipStages": [
+        "any"
+      ],
+      "intensity": 1,
+      "maturity": "general",
+      "interactionType": "open",
+      "starter": "random",
+      "safetyTags": [],
+      "sourceClass": "original",
+      "version": 1,
+      "locale": "en",
+      "text": "What fictional job would we be hilariously unqualified to do?",
+      "updatedAt": "2026-08-14T00:00:00.000Z"
+    },
+    {
+      "id": "qi_laugh_together_0005",
+      "intentKey": "adventure.accidental",
+      "mode": [
+        "couple",
+        "friends"
+      ],
+      "packIds": [
+        "laugh_together"
+      ],
+      "topicTags": [
+        "humor",
+        "personality"
+      ],
+      "relationshipStages": [
+        "any"
+      ],
+      "intensity": 1,
+      "maturity": "general",
+      "interactionType": "predict",
+      "starter": "both",
+      "safetyTags": [],
+      "sourceClass": "original",
+      "version": 1,
+      "locale": "en",
+      "text": "Who here is most likely to turn a wrong turn into a full-day adventure?",
+      "updatedAt": "2026-08-14T00:00:00.000Z"
+    },
+    {
+      "id": "qi_laugh_together_0006",
+      "intentKey": "sitcom.week_title",
+      "mode": [
+        "couple",
+        "friends"
+      ],
+      "packIds": [
+        "laugh_together"
+      ],
+      "topicTags": [
+        "humor",
+        "daily-life"
+      ],
+      "relationshipStages": [
+        "any"
+      ],
+      "intensity": 2,
+      "maturity": "general",
+      "interactionType": "memory",
+      "starter": "both",
+      "safetyTags": [],
+      "sourceClass": "original",
+      "version": 1,
+      "locale": "en",
+      "text": "If our last week were a sitcom episode, what would its title be?",
+      "updatedAt": "2026-08-14T00:00:00.000Z"
+    },
+    {
+      "id": "qi_laugh_together_0007",
+      "intentKey": "house.rule_ridiculous",
+      "mode": [
+        "couple",
+        "friends"
+      ],
+      "packIds": [
+        "laugh_together"
+      ],
+      "topicTags": [
+        "humor",
+        "home"
+      ],
+      "relationshipStages": [
+        "any"
+      ],
+      "intensity": 2,
+      "maturity": "general",
+      "interactionType": "scenario",
+      "starter": "random",
+      "safetyTags": [],
+      "sourceClass": "original",
+      "version": 1,
+      "locale": "en",
+      "text": "What ridiculous house rule could we defend with complete confidence?",
+      "updatedAt": "2026-08-14T00:00:00.000Z"
+    },
+    {
+      "id": "qi_laugh_together_0008",
+      "intentKey": "animals.spokesperson",
+      "mode": [
+        "couple",
+        "friends"
+      ],
+      "packIds": [
+        "laugh_together"
+      ],
+      "topicTags": [
+        "humor",
+        "personality"
+      ],
+      "relationshipStages": [
+        "any"
+      ],
+      "intensity": 1,
+      "maturity": "general",
+      "interactionType": "choice",
+      "starter": "both",
+      "safetyTags": [],
+      "sourceClass": "original",
+      "version": 1,
+      "locale": "en",
+      "text": "If animals could choose one of us as their spokesperson, who would they pick?",
+      "updatedAt": "2026-08-14T00:00:00.000Z"
+    },
+    {
+      "id": "qi_laugh_together_0009",
+      "intentKey": "conspiracy.harmless",
+      "mode": [
+        "couple",
+        "friends"
+      ],
+      "packIds": [
+        "laugh_together"
+      ],
+      "topicTags": [
+        "humor",
+        "friends"
+      ],
+      "relationshipStages": [
+        "any"
+      ],
+      "intensity": 2,
+      "maturity": "general",
+      "interactionType": "rapid",
+      "starter": "both",
+      "safetyTags": [],
+      "sourceClass": "original",
+      "version": 1,
+      "locale": "en",
+      "text": "What harmless conspiracy theory could you invent about someone playing?",
+      "updatedAt": "2026-08-14T00:00:00.000Z"
+    },
+    {
+      "id": "qi_laugh_together_0010",
+      "intentKey": "mistake.legendary",
+      "mode": [
+        "couple",
+        "friends"
+      ],
+      "packIds": [
+        "laugh_together"
+      ],
+      "topicTags": [
+        "humor",
+        "memories"
+      ],
+      "relationshipStages": [
+        "any"
+      ],
+      "intensity": 2,
+      "maturity": "general",
+      "interactionType": "memory",
+      "starter": "random",
+      "safetyTags": [],
+      "sourceClass": "original",
+      "version": 1,
+      "locale": "en",
+      "text": "Which shared mistake deserves to become a story we tell forever?",
+      "updatedAt": "2026-08-14T00:00:00.000Z"
+    },
+    {
+      "id": "qi_warm_start_0001",
+      "intentKey": "shared.extra_hour",
+      "mode": [
+        "couple"
+      ],
+      "packIds": [
+        "warm_start"
+      ],
+      "topicTags": [
+        "daily-life"
+      ],
+      "relationshipStages": [
+        "any"
+      ],
+      "intensity": 1,
+      "maturity": "general",
+      "interactionType": "scenario",
+      "starter": "random",
+      "safetyTags": [],
+      "sourceClass": "original",
+      "version": 1,
+      "locale": "en",
+      "text": "If we found an extra unplanned hour tonight, how would you want to spend it together?",
+      "updatedAt": "2026-08-14T00:00:00.000Z"
+    },
+    {
+      "id": "qi_warm_start_0002",
+      "intentKey": "shared.familiar_sense",
+      "mode": [
+        "couple"
+      ],
+      "packIds": [
+        "warm_start"
+      ],
+      "topicTags": [
+        "memories",
+        "daily-life"
+      ],
+      "relationshipStages": [
+        "any"
+      ],
+      "intensity": 1,
+      "maturity": "general",
+      "interactionType": "open",
+      "starter": "both",
+      "safetyTags": [],
+      "sourceClass": "original",
+      "version": 1,
+      "locale": "en",
+      "text": "What ordinary sound or smell feels most like our time together?",
+      "updatedAt": "2026-08-14T00:00:00.000Z"
+    },
+    {
+      "id": "qi_warm_start_0003",
+      "intentKey": "habits.comforting",
+      "mode": [
+        "couple"
+      ],
+      "packIds": [
+        "warm_start"
+      ],
+      "topicTags": [
+        "habits",
+        "affection"
+      ],
+      "relationshipStages": [
+        "any"
+      ],
+      "intensity": 2,
+      "maturity": "general",
+      "interactionType": "predict",
+      "starter": "both",
+      "safetyTags": [],
+      "sourceClass": "original",
+      "version": 1,
+      "locale": "en",
+      "text": "Which of my everyday habits has become strangely comforting to you?",
+      "updatedAt": "2026-08-14T00:00:00.000Z"
+    },
+    {
+      "id": "qi_warm_start_0004",
+      "intentKey": "plans.mood_lift",
+      "mode": [
+        "couple"
+      ],
+      "packIds": [
+        "warm_start"
+      ],
+      "topicTags": [
+        "daily-life"
+      ],
+      "relationshipStages": [
+        "any"
+      ],
+      "intensity": 1,
+      "maturity": "general",
+      "interactionType": "open",
+      "starter": "random",
+      "safetyTags": [],
+      "sourceClass": "original",
+      "version": 1,
+      "locale": "en",
+      "text": "What low-effort plan almost always improves your mood?",
+      "updatedAt": "2026-08-14T00:00:00.000Z"
+    },
+    {
+      "id": "qi_warm_start_0005",
+      "intentKey": "rituals.new_weekly",
+      "mode": [
+        "couple"
+      ],
+      "packIds": [
+        "warm_start"
+      ],
+      "topicTags": [
+        "habits",
+        "future"
+      ],
+      "relationshipStages": [
+        "any"
+      ],
+      "intensity": 2,
+      "maturity": "general",
+      "interactionType": "scenario",
+      "starter": "both",
+      "safetyTags": [],
+      "sourceClass": "original",
+      "version": 1,
+      "locale": "en",
+      "text": "If our week needed one small tradition, what should we start?",
+      "updatedAt": "2026-08-14T00:00:00.000Z"
+    },
+    {
+      "id": "qi_warm_start_0006",
+      "intentKey": "mood.snack_match",
+      "mode": [
+        "couple"
+      ],
+      "packIds": [
+        "warm_start"
+      ],
+      "topicTags": [
+        "humor",
+        "daily-life"
+      ],
+      "relationshipStages": [
+        "any"
+      ],
+      "intensity": 1,
+      "maturity": "general",
+      "interactionType": "rapid",
+      "starter": "both",
+      "safetyTags": [],
+      "sourceClass": "original",
+      "version": 1,
+      "locale": "en",
+      "text": "What snack or drink best matches our relationship energy today, and why?",
+      "updatedAt": "2026-08-14T00:00:00.000Z"
+    },
+    {
+      "id": "qi_warm_start_0007",
+      "intentKey": "quiet.valuable_moment",
+      "mode": [
+        "couple"
+      ],
+      "packIds": [
+        "warm_start"
+      ],
+      "topicTags": [
+        "affection",
+        "daily-life"
+      ],
+      "relationshipStages": [
+        "any"
+      ],
+      "intensity": 2,
+      "maturity": "general",
+      "interactionType": "memory",
+      "starter": "random",
+      "safetyTags": [],
+      "sourceClass": "original",
+      "version": 1,
+      "locale": "en",
+      "text": "Which quiet moment between us deserves more attention?",
+      "updatedAt": "2026-08-14T00:00:00.000Z"
+    },
+    {
+      "id": "qi_warm_start_0008",
+      "intentKey": "fun.easy_this_week",
+      "mode": [
+        "couple"
+      ],
+      "packIds": [
+        "warm_start"
+      ],
+      "topicTags": [
+        "daily-life"
+      ],
+      "relationshipStages": [
+        "any"
+      ],
+      "intensity": 1,
+      "maturity": "general",
+      "interactionType": "open",
+      "starter": "both",
+      "safetyTags": [],
+      "sourceClass": "original",
+      "version": 1,
+      "locale": "en",
+      "text": "What is one easy thing we could do this week just for fun?",
+      "updatedAt": "2026-08-14T00:00:00.000Z"
+    },
+    {
+      "id": "qi_warm_start_0009",
+      "intentKey": "comfort.relaxed_together",
+      "mode": [
+        "couple"
+      ],
+      "packIds": [
+        "warm_start"
+      ],
+      "topicTags": [
+        "affection"
+      ],
+      "relationshipStages": [
+        "any"
+      ],
+      "intensity": 2,
+      "maturity": "general",
+      "interactionType": "open",
+      "starter": "both",
+      "safetyTags": [],
+      "sourceClass": "original",
+      "version": 1,
+      "locale": "en",
+      "text": "When do you feel most relaxed around me?",
+      "updatedAt": "2026-08-14T00:00:00.000Z"
+    },
+    {
+      "id": "qi_warm_start_0010",
+      "intentKey": "routine.share_more",
+      "mode": [
+        "couple"
+      ],
+      "packIds": [
+        "warm_start"
+      ],
+      "topicTags": [
+        "daily-life",
+        "habits"
+      ],
+      "relationshipStages": [
+        "any"
+      ],
+      "intensity": 2,
+      "maturity": "general",
+      "interactionType": "choice",
+      "starter": "random",
+      "safetyTags": [],
+      "sourceClass": "original",
+      "version": 1,
+      "locale": "en",
+      "text": "Which part of a normal day would you most like us to share more often?",
+      "updatedAt": "2026-08-14T00:00:00.000Z"
+    }
+  ]
+}

@@ -33,6 +33,9 @@ jobs:
       - name: Validate source
         run: npm run validate
 
+      - name: Report content inventory
+        run: npm run content:report
+
       - name: Check Expo project
         run: npm run expo:doctor
 

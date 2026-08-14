@@ -13,9 +13,15 @@
     "lint": "expo lint",
     "typecheck": "tsc --noEmit",
     "test": "jest",
+    "content:validate": "node --import tsx scripts/content-tool.ts validate",
+    "content:duplicates": "node --import tsx scripts/content-tool.ts duplicates",
+    "content:report": "node --import tsx scripts/content-tool.ts report",
+    "content:build": "node --import tsx scripts/content-tool.ts build",
+    "content:check": "node --import tsx scripts/content-tool.ts check",
+    "content:diff": "node --import tsx scripts/content-tool.ts check",
     "expo:doctor": "expo-doctor",
     "export:web": "expo export --platform web",
-    "validate": "npm run format:check && npm run lint && npm run typecheck && npm run test -- --runInBand"
+    "validate": "npm run format:check && npm run lint && npm run typecheck && npm run test -- --runInBand && npm run content:validate && npm run content:duplicates && npm run content:check"
   },
   "dependencies": {
     "@react-native-async-storage/async-storage": "^2.2.0",
@@ -32,6 +38,7 @@
     "react-native-safe-area-context": "~5.7.0",
     "react-native-screens": "~4.26.0",
     "react-native-web": "~0.21.2",
+    "zod": "^4.4.3",
     "zustand": "^5.0.15"
   },
   "devDependencies": {
@@ -47,6 +54,7 @@
     "jest-expo": "~57.0.4",
     "prettier": "^3.9.0",
     "react-test-renderer": "19.2.3",
+    "tsx": "^4.23.12",
     "typescript": "~6.0.3"
   }
 }

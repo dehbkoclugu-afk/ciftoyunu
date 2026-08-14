@@ -1,0 +1,13 @@
+{
+  "schemaVersion": 1,
+  "contentVersion": "2026.08.1",
+  "minimumAppVersion": "0.1.0",
+  "locales": {
+    "en": {
+      "bundle": "en",
+      "sha256": "126a5a98cd9e13ffc65d2e613a0b71f5bf403db6b1a9294895661f7416eaaad9",
+      "questionCount": 50,
+      "approvedAt": "2026-08-14T00:00:00.000Z"
+    }
+  }
+}
