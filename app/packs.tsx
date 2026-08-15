@@ -5,7 +5,7 @@
  * FIRST VIEWPORT: Back action and mode-aware title above a low filter rail, with the first large cover already visible.
  * FORM: Operate-mode editorial shelf; responsive one/two-column cards with detail-first native modal behavior.
  */
-import { useState } from 'react';
+import { useEffect, useState } from 'react';
 import { router } from 'expo-router';
 import { ScrollView, StyleSheet, View, useWindowDimensions } from 'react-native';
 
@@ -21,6 +21,7 @@ import {
   type PackFilter,
 } from '@/features/packs/packCatalog';
 import { getLocaleOption } from '@/i18n';
+import { track } from '@/services/analytics/runtime';
 import { useGameSetupStore } from '@/state/gameSetupStore';
 import { usePurchaseStore } from '@/state/purchaseStore';
 import { useSettingsStore } from '@/state/settingsStore';
@@ -53,13 +54,19 @@ export default function PacksScreen() {
     ? buildPackCatalog(bundle, { mode, ageConfirmed18, comfortLevel, filter })
     : [];
 
+  useEffect(() => {
+    track('pack_library_viewed', { mode });
+  }, [mode]);
+
   const choose = (packId: string) => {
+    track('pack_selected', { pack_id: packId, source: 'library' });
     selectPack(packId);
     setDetail(null);
     router.push('/session-setup');
   };
 
   const unlock = (packId: string) => {
+    track('pack_selected', { pack_id: packId, source: 'locked_library' });
     selectPack(packId);
     setDetail(null);
     router.push({ pathname: '/premium', params: { packId } });
@@ -123,7 +130,10 @@ export default function PacksScreen() {
               item={item}
               selected={selectedPackId === item.id}
               wide={wide}
-              onPress={setDetail}
+              onPress={(item) => {
+                setDetail(item);
+                track('pack_viewed', { pack_id: item.id, premium: item.premium });
+              }}
             />
           ))}
         </View>

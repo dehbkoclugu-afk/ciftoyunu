@@ -15,6 +15,8 @@ type SettingsActions = {
   setComfort: (comfortLevel: SettingsData['comfortLevel']) => void;
   setRememberPlayers: (rememberPlayers: boolean) => void;
   completeOnboarding: () => void;
+  setAnalyticsEnabled: (enabled: boolean) => void;
+  setCrashReportingEnabled: (enabled: boolean) => void;
 };
 
 export type SettingsStore = SettingsData & SettingsActions;
@@ -33,6 +35,8 @@ function settingsOnly(state: SettingsStore): SettingsData {
     ...(state.dailyReminderTime ? { dailyReminderTime: state.dailyReminderTime } : {}),
     rememberPlayers: state.rememberPlayers,
     onboardingCompleted: state.onboardingCompleted,
+    analyticsEnabled: state.analyticsEnabled,
+    crashReportingEnabled: state.crashReportingEnabled,
   };
 }
 
@@ -60,6 +64,8 @@ export const useSettingsStore = create<SettingsStore>((set, get) => {
       }),
     setRememberPlayers: (rememberPlayers) => persist({ rememberPlayers }),
     completeOnboarding: () => persist({ onboardingCompleted: true }),
+    setAnalyticsEnabled: (analyticsEnabled) => persist({ analyticsEnabled }),
+    setCrashReportingEnabled: (crashReportingEnabled) => persist({ crashReportingEnabled }),
   };
 });
 

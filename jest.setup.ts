@@ -21,3 +21,10 @@ jest.mock('react-native-purchases', () => ({
     removeCustomerInfoUpdateListener: jest.fn(),
   },
 }));
+
+jest.mock('@sentry/react-native', () => ({
+  captureException: jest.fn(),
+  close: jest.fn(async () => true),
+  init: jest.fn(),
+  withScope: jest.fn((callback) => callback({ setExtra: jest.fn() })),
+}));

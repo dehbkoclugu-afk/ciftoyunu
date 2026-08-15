@@ -11,6 +11,7 @@ import { StyleSheet, View } from 'react-native';
 import { AppButton, AppScreen, AppText } from '@/components/primitives';
 import { useAppTheme } from '@/design';
 import { ModeCard } from '@/features/player-setup/ModeCard';
+import { track } from '@/services/analytics/runtime';
 import { useGameSetupStore } from '@/state/gameSetupStore';
 
 export default function ModeScreen() {
@@ -36,7 +37,10 @@ export default function ModeScreen() {
           description="Romantic, playful, and deeper questions for two."
           playerCount="2 players"
           selected={mode === 'couple'}
-          onSelect={selectMode}
+          onSelect={(next) => {
+            selectMode(next);
+            track('mode_selected', { mode: next });
+          }}
         />
         <ModeCard
           mode="friends"
@@ -44,7 +48,10 @@ export default function ModeScreen() {
           description="Fast stories, hot takes, and wildcards for the group."
           playerCount="2-8 players"
           selected={mode === 'friends'}
-          onSelect={selectMode}
+          onSelect={(next) => {
+            selectMode(next);
+            track('mode_selected', { mode: next });
+          }}
         />
       </View>
 

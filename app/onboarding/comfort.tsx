@@ -6,6 +6,7 @@ import { useAppTheme } from '@/design';
 import { ComfortOption } from '@/features/onboarding/ComfortOption';
 import { OnboardingHeader } from '@/features/onboarding/OnboardingHeader';
 import type { ComfortLevel } from '@/storage/migrations';
+import { track } from '@/services/analytics/runtime';
 import { useSettingsStore } from '@/state/settingsStore';
 
 const options: { value: ComfortLevel; label: string; description: string }[] = [
@@ -26,10 +27,13 @@ export default function ComfortScreen() {
   const toggleAge = () => {
     const next = !ageConfirmed18;
     setAgeConfirmed(next);
+    if (next) track('age_gate_confirmed');
     if (!next && comfortLevel === 'spicy') setComfort('light');
   };
 
   const finish = () => {
+    track('comfort_level_selected', { comfort_level: comfortLevel, age_confirmed: ageConfirmed18 });
+    track('onboarding_completed', { comfort_level: comfortLevel });
     completeOnboarding();
     router.replace('/home');
   };

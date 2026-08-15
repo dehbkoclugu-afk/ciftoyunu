@@ -13,6 +13,7 @@ import { AppButton, AppScreen, AppText, Chip } from '@/components/primitives';
 import { loadEmbeddedContent } from '@/content/loader';
 import { useAppTheme } from '@/design';
 import { resolvePlayers } from '@/features/player-setup/playerSetup';
+import { track } from '@/services/analytics/runtime';
 import {
   type IntensityPreset,
   type SessionDuration,
@@ -88,6 +89,14 @@ export function SessionSetupScreen() {
     }
     setStarting(true);
     setStartFailed(false);
+    track('session_setup_completed', {
+      pack_id: pack.id,
+      mode,
+      duration_minutes: durationMinutes,
+      intensity: intensityPreset,
+      excluded_topic_count: excludedTopics.length,
+      mature_enabled: matureAllowed && includeMature,
+    });
     const session = await start({
       bundle,
       mode,
@@ -103,8 +112,15 @@ export function SessionSetupScreen() {
       packTitle: packCopy.title,
     });
     setStarting(false);
-    if (session) router.replace('/play');
-    else setStartFailed(true);
+    if (session) {
+      track('session_started', {
+        session_id: session.id,
+        pack_id: pack.id,
+        mode,
+        card_count: session.cards?.length ?? duration.questions,
+      });
+      router.replace('/play');
+    } else setStartFailed(true);
   };
 
   if (!bundle || !pack || !packCopy) {

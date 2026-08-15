@@ -7,6 +7,7 @@ import { AppButton, AppScreen, AppText } from '@/components/primitives';
 import { useAppTheme } from '@/design';
 import { HowItWorksSheet } from '@/features/onboarding/HowItWorksSheet';
 import { OnboardingHeader } from '@/features/onboarding/OnboardingHeader';
+import { track } from '@/services/analytics/runtime';
 
 export default function WelcomeScreen() {
   const theme = useAppTheme();
@@ -74,7 +75,13 @@ export default function WelcomeScreen() {
       </View>
 
       <View style={styles.actions}>
-        <AppButton label="Let's begin" onPress={() => router.push('/onboarding/comfort')} />
+        <AppButton
+          label="Let's begin"
+          onPress={() => {
+            track('onboarding_started');
+            router.push('/onboarding/comfort');
+          }}
+        />
         <AppButton label="How it works" onPress={() => setShowHowItWorks(true)} variant="ghost" />
       </View>
 

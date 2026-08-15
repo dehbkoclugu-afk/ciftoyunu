@@ -100,4 +100,14 @@ describe('HomeScreen', () => {
     await fireEvent.press(screen.getByRole('button', { name: 'Saved questions' }));
     expect(mockPush).toHaveBeenCalledWith('/favorites');
   });
+
+  it('keeps privacy controls reachable from the first screen', async () => {
+    const screen = await render(
+      <ThemeProvider forcedScheme="light">
+        <HomeScreen />
+      </ThemeProvider>,
+    );
+    await fireEvent.press(screen.getByRole('button', { name: 'Privacy' }));
+    expect(mockPush).toHaveBeenCalledWith('/settings');
+  });
 });

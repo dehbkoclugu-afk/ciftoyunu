@@ -5,7 +5,7 @@
  * FIRST VIEWPORT: Human closing line followed by counts that describe, never judge.
  * FORM: Operate-mode closing ledger extending the physical card-table world.
  */
-import { useEffect, useState } from 'react';
+import { useEffect, useRef, useState } from 'react';
 import { router } from 'expo-router';
 import { Pressable, ScrollView, Share, StyleSheet, View } from 'react-native';
 
@@ -14,6 +14,7 @@ import { useAppTheme } from '@/design';
 import { getSessionMetrics, getViewedQuestions } from '@/features/session/gameplay';
 import { useSessionStore } from '@/state/sessionStore';
 import { usePurchaseStore } from '@/state/purchaseStore';
+import { track } from '@/services/analytics/runtime';
 
 function minutesLabel(elapsedMs: number): string {
   const minutes = Math.max(1, Math.round(elapsedMs / 60_000));
@@ -28,10 +29,18 @@ export function RecapScreen() {
   const chooseKeeper = useSessionStore((state) => state.chooseKeeper);
   const clear = useSessionStore((state) => state.clear);
   const premium = usePurchaseStore((state) => state.entitlement === 'premium');
+  const trackedSessionId = useRef<string | null>(null);
 
   useEffect(() => {
     if (!activeSession) router.replace('/home');
     else if (!activeSession.completedAt) router.replace('/play');
+    else if (trackedSessionId.current !== activeSession.id) {
+      trackedSessionId.current = activeSession.id;
+      track('recap_viewed', {
+        session_id: activeSession.id,
+        pack_id: activeSession.packIds[0] ?? 'unknown',
+      });
+    }
   }, [activeSession]);
 
   if (!activeSession?.completedAt) return null;

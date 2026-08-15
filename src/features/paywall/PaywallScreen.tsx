@@ -5,7 +5,7 @@
  * FIRST VIEWPORT: Visible close, one decisive promise, three benefits, then the first store plan.
  * FORM: Persuade-mode single-screen table receipt extending the established editorial card world.
  */
-import { useEffect } from 'react';
+import { useEffect, useRef } from 'react';
 import { router } from 'expo-router';
 import { Linking, Pressable, StyleSheet, View } from 'react-native';
 
@@ -14,6 +14,7 @@ import { getPurchaseRuntimeConfig } from '@/config/purchases';
 import { loadEmbeddedContent } from '@/content/loader';
 import { useAppTheme } from '@/design';
 import type { PurchasePackage } from '@/services/purchases/types';
+import { track } from '@/services/analytics/runtime';
 import { usePurchaseStore, type PurchaseStatus } from '@/state/purchaseStore';
 import { useSettingsStore } from '@/state/settingsStore';
 
@@ -81,10 +82,60 @@ export function PaywallScreen({ packId, termsUrl, privacyUrl }: PaywallScreenPro
   const resolvedPrivacyUrl = privacyUrl ?? runtime.privacyUrl;
   const busy = status === 'loading' || status === 'purchasing' || status === 'restoring';
   const message = statusCopy[status];
+  const viewed = useRef(false);
 
   useEffect(() => {
     if (status === 'unconfigured') void hydrate();
   }, [hydrate, status]);
+
+  useEffect(() => {
+    if (viewed.current) return;
+    viewed.current = true;
+    track('paywall_viewed', {
+      placement: packId ? 'pack_unlock' : 'general',
+      offering_id: offering?.id ?? 'loading',
+      package_ids: offering?.packages.map((item) => item.id) ?? [],
+    });
+  }, [offering, packId]);
+
+  const buy = async () => {
+    const selected = offering?.packages.find((item) => item.id === selectedPackageId);
+    track('purchase_started', {
+      offering_id: offering?.id ?? 'unknown',
+      selected_package: selectedPackageId ?? 'none',
+      displayed_price: selected?.price ?? 'unknown',
+    });
+    const succeeded = await purchase();
+    const result = usePurchaseStore.getState().status;
+    track(
+      succeeded
+        ? 'purchase_succeeded'
+        : result === 'cancelled'
+          ? 'purchase_cancelled'
+          : 'purchase_failed',
+      {
+        offering_id: offering?.id ?? 'unknown',
+        selected_package: selectedPackageId ?? 'none',
+        result,
+      },
+    );
+    if (succeeded) track('entitlement_changed', { entitlement: 'premium', source: 'purchase' });
+  };
+
+  const restorePurchase = async () => {
+    track('restore_started', { placement: packId ? 'pack_unlock' : 'general' });
+    const succeeded = await restore();
+    const result = usePurchaseStore.getState().status;
+    track(
+      succeeded
+        ? 'restore_succeeded'
+        : result === 'nothing_to_restore'
+          ? 'restore_empty'
+          : 'restore_failed',
+      { result },
+    );
+    if (succeeded) track('entitlement_changed', { entitlement: 'premium', source: 'restore' });
+  };
 
   const continueAfterSuccess = () => {
     if (packId) router.replace('/session-setup');
@@ -110,7 +161,14 @@ export function PaywallScreen({ packId, termsUrl, privacyUrl }: PaywallScreenPro
   return (
     <AppScreen scroll contentStyle={{ paddingBottom: theme.spacing[10] }}>
       <View style={styles.closeRow}>
-        <AppButton label="Close premium" variant="ghost" onPress={() => router.back()} />
+        <AppButton
+          label="Close premium"
+          variant="ghost"
+          onPress={() => {
+            track('paywall_dismissed', { placement: packId ? 'pack_unlock' : 'general' });
+            router.back();
+          }}
+        />
       </View>
 
       <View
@@ -187,7 +245,14 @@ export function PaywallScreen({ packId, termsUrl, privacyUrl }: PaywallScreenPro
                 accessibilityLabel={`${item.title}. ${billingLine(item)}`}
                 accessibilityState={{ checked: selected, disabled: busy }}
                 disabled={busy}
-                onPress={() => selectPackage(item.id)}
+                onPress={() => {
+                  selectPackage(item.id);
+                  track('package_selected', {
+                    offering_id: offering.id,
+                    selected_package: item.id,
+                    displayed_price: item.price,
+                  });
+                }}
                 style={({ pressed }) => [
                   styles.plan,
                   {
@@ -229,7 +294,7 @@ export function PaywallScreen({ packId, termsUrl, privacyUrl }: PaywallScreenPro
             }
             loading={status === 'purchasing'}
             disabled={!selectedPackageId || status === 'restoring'}
-            onPress={() => void purchase()}
+            onPress={() => void buy()}
           />
         ) : (
           <AppButton
@@ -246,7 +311,7 @@ export function PaywallScreen({ packId, termsUrl, privacyUrl }: PaywallScreenPro
           disabled={
             status === 'loading' || status === 'purchasing' || status === 'configuration_error'
           }
-          onPress={() => void restore()}
+          onPress={() => void restorePurchase()}
         />
       </View>
 

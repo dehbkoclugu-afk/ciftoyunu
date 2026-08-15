@@ -49,13 +49,16 @@ export default function HomeScreen() {
   return (
     <AppScreen scroll contentStyle={{ paddingBottom: theme.spacing[8] }}>
       <View style={styles.topBar}>
-        <BrandMark size={compact ? 42 : 48} />
-        <View style={styles.brandCopy}>
-          <AppText variant="h3">Project Duo</AppText>
-          <AppText variant="caption" tone="muted">
-            One phone. Real conversation.
-          </AppText>
+        <View style={styles.brandGroup}>
+          <BrandMark size={compact ? 42 : 48} />
+          <View style={styles.brandCopy}>
+            <AppText variant="h3">Project Duo</AppText>
+            <AppText variant="caption" tone="muted">
+              One phone. Real conversation.
+            </AppText>
+          </View>
         </View>
+        <AppButton label="Privacy" variant="ghost" onPress={() => router.push('/settings')} />
       </View>
 
       <View style={[styles.hero, { marginTop: compact ? theme.spacing[7] : theme.spacing[10] }]}>
@@ -204,7 +207,14 @@ export default function HomeScreen() {
 }
 
 const styles = StyleSheet.create({
-  topBar: { minHeight: 64, flexDirection: 'row', alignItems: 'center', gap: 12 },
+  topBar: {
+    minHeight: 64,
+    flexDirection: 'row',
+    alignItems: 'center',
+    justifyContent: 'space-between',
+    gap: 12,
+  },
+  brandGroup: { flex: 1, flexDirection: 'row', alignItems: 'center', gap: 12 },
   brandCopy: { gap: 1 },
   hero: { maxWidth: 580 },
   heroCopy: { marginTop: 12, maxWidth: 500 },

@@ -5,6 +5,7 @@ import { StatusBar } from 'expo-status-bar';
 import { SafeAreaProvider } from 'react-native-safe-area-context';
 
 import { ThemeProvider, useAppTheme } from '@/design';
+import { AppErrorBoundary } from '@/components/feedback/AppErrorBoundary';
 import { useAppStore } from '@/state/appStore';
 import { useSettingsStore } from '@/state/settingsStore';
 
@@ -46,7 +47,9 @@ function AppShell() {
 
   return (
     <ThemeProvider {...(forcedScheme ? { forcedScheme } : {})}>
-      <RootStack />
+      <AppErrorBoundary>
+        <RootStack />
+      </AppErrorBoundary>
     </ThemeProvider>
   );
 }
