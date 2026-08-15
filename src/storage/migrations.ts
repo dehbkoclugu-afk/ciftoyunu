@@ -15,7 +15,7 @@ export type SettingsData = {
   ageConfirmed18: boolean;
   excludedTopics: string[];
   notificationsEnabled: boolean;
-  dailyReminderTime?: string;
+  dailyReminderTime: string | undefined;
   rememberPlayers: boolean;
   onboardingCompleted: boolean;
   analyticsEnabled: boolean;
@@ -37,6 +37,7 @@ export const DEFAULT_SETTINGS: SettingsData = {
   ageConfirmed18: false,
   excludedTopics: [],
   notificationsEnabled: false,
+  dailyReminderTime: undefined,
   rememberPlayers: false,
   onboardingCompleted: false,
   analyticsEnabled: false,
@@ -81,7 +82,7 @@ export function migrateSettings(value: unknown): SettingsData {
     ageConfirmed18,
     excludedTopics,
     notificationsEnabled: asBoolean(source.notificationsEnabled, false),
-    ...(dailyReminderTime ? { dailyReminderTime } : {}),
+    dailyReminderTime,
     rememberPlayers: asBoolean(source.rememberPlayers, false),
     onboardingCompleted: asBoolean(source.onboardingCompleted, false),
     analyticsEnabled: asBoolean(source.analyticsEnabled, false),

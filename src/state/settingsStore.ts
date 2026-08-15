@@ -17,6 +17,7 @@ type SettingsActions = {
   completeOnboarding: () => void;
   setAnalyticsEnabled: (enabled: boolean) => void;
   setCrashReportingEnabled: (enabled: boolean) => void;
+  setDailyReminder: (time?: string) => void;
 };
 
 export type SettingsStore = SettingsData & SettingsActions;
@@ -32,7 +33,7 @@ function settingsOnly(state: SettingsStore): SettingsData {
     ageConfirmed18: state.ageConfirmed18,
     excludedTopics: state.excludedTopics,
     notificationsEnabled: state.notificationsEnabled,
-    ...(state.dailyReminderTime ? { dailyReminderTime: state.dailyReminderTime } : {}),
+    dailyReminderTime: state.dailyReminderTime,
     rememberPlayers: state.rememberPlayers,
     onboardingCompleted: state.onboardingCompleted,
     analyticsEnabled: state.analyticsEnabled,
@@ -66,6 +67,8 @@ export const useSettingsStore = create<SettingsStore>((set, get) => {
     completeOnboarding: () => persist({ onboardingCompleted: true }),
     setAnalyticsEnabled: (analyticsEnabled) => persist({ analyticsEnabled }),
     setCrashReportingEnabled: (crashReportingEnabled) => persist({ crashReportingEnabled }),
+    setDailyReminder: (dailyReminderTime) =>
+      persist({ notificationsEnabled: Boolean(dailyReminderTime), dailyReminderTime }),
   };
 });
 

@@ -1,15 +1,18 @@
 import { useEffect } from 'react';
-import { Stack } from 'expo-router';
+import { router, Stack } from 'expo-router';
 import * as SplashScreen from 'expo-splash-screen';
 import { StatusBar } from 'expo-status-bar';
 import { SafeAreaProvider } from 'react-native-safe-area-context';
 
 import { ThemeProvider, useAppTheme } from '@/design';
 import { AppErrorBoundary } from '@/components/feedback/AppErrorBoundary';
+import { useNotificationRouting } from '@/services/notifications/observer';
 import { useAppStore } from '@/state/appStore';
 import { useSettingsStore } from '@/state/settingsStore';
 
 void SplashScreen.preventAutoHideAsync().catch(() => undefined);
+
+const navigateNotification = (destination: '/daily') => router.push(destination);
 
 function RootStack() {
   const theme = useAppTheme();
@@ -34,6 +37,7 @@ function AppShell() {
   const bootStatus = useAppStore((state) => state.bootStatus);
   const themePreference = useSettingsStore((state) => state.theme);
   const forcedScheme = themePreference === 'system' ? undefined : themePreference;
+  useNotificationRouting(navigateNotification);
 
   useEffect(() => {
     void hydrate();

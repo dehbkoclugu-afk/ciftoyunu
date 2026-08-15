@@ -43,7 +43,11 @@ export default ({ config }: ConfigContext): ExpoConfig => {
     web: {
       bundler: 'metro',
     },
-    plugins: ['expo-router', '@sentry/react-native/expo'],
+    plugins: [
+      'expo-router',
+      '@sentry/react-native/expo',
+      ['expo-notifications', { color: '#7357E8', defaultChannel: 'daily-reminders' }],
+    ],
     experiments: {
       typedRoutes: true,
     },
