@@ -4,6 +4,7 @@ import PacksScreen from '../../../app/packs';
 import { ThemeProvider } from '@/design/ThemeProvider';
 import { createDefaultPlayers } from '@/features/player-setup/playerSetup';
 import { useGameSetupStore } from '@/state/gameSetupStore';
+import { usePurchaseStore } from '@/state/purchaseStore';
 import { useSettingsStore } from '@/state/settingsStore';
 import { DEFAULT_SETTINGS } from '@/storage/migrations';
 
@@ -36,6 +37,7 @@ describe('pack library screen', () => {
       selectedPackId: null,
       persistenceFailed: false,
     });
+    usePurchaseStore.setState({ entitlement: 'free' });
   });
 
   it('shows mode-eligible packs and applies filters', async () => {
@@ -70,12 +72,28 @@ describe('pack library screen', () => {
     expect(mockPush).toHaveBeenCalledWith('/session-setup');
   });
 
-  it('explains premium lock without exposing a fake purchase action', async () => {
+  it('preserves a premium selection and opens the paywall for free users', async () => {
     const screen = await renderScreen();
 
     await fireEvent.press(screen.getByRole('button', { name: 'Open Deep Night details' }));
     expect(screen.getByText('Premium access is required for this pack.')).toBeTruthy();
-    expect(screen.queryByRole('button', { name: /unlock|purchase|buy/i })).toBeNull();
+    await fireEvent.press(screen.getByRole('button', { name: 'Unlock all packs' }));
+
+    expect(useGameSetupStore.getState().selectedPackId).toBe('deep_night');
+    expect(mockPush).toHaveBeenCalledWith({
+      pathname: '/premium',
+      params: { packId: 'deep_night' },
+    });
+  });
+
+  it('lets verified premium users choose a premium pack directly', async () => {
+    usePurchaseStore.setState({ entitlement: 'premium' });
+    const screen = await renderScreen();
+    await fireEvent.press(screen.getByRole('button', { name: 'Open Deep Night details' }));
+    await fireEvent.press(screen.getByRole('button', { name: 'Choose Deep Night' }));
+
+    expect(useGameSetupStore.getState().selectedPackId).toBe('deep_night');
+    expect(mockPush).toHaveBeenCalledWith('/session-setup');
   });
 
   it('never falls back to English when the locale bundle is missing', async () => {

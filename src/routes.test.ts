@@ -11,6 +11,7 @@ import SessionSetupScreen from '../app/session-setup';
 import PlayScreen from '../app/play';
 import RecapScreen from '../app/recap';
 import FavoritesScreen from '../app/favorites';
+import PremiumScreen from '../app/premium';
 
 describe('route modules', () => {
   it('exports launch, onboarding, home, and development gallery surfaces', () => {
@@ -26,6 +27,7 @@ describe('route modules', () => {
     expect(PlayScreen).toEqual(expect.any(Function));
     expect(RecapScreen).toEqual(expect.any(Function));
     expect(FavoritesScreen).toEqual(expect.any(Function));
+    expect(PremiumScreen).toEqual(expect.any(Function));
     expect(DevGalleryScreen).toEqual(expect.any(Function));
   });
 });

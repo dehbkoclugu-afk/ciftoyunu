@@ -22,6 +22,7 @@ import {
 } from '@/features/packs/packCatalog';
 import { getLocaleOption } from '@/i18n';
 import { useGameSetupStore } from '@/state/gameSetupStore';
+import { usePurchaseStore } from '@/state/purchaseStore';
 import { useSettingsStore } from '@/state/settingsStore';
 
 const filterLabels: Record<PackFilter, string> = {
@@ -45,6 +46,7 @@ export default function PacksScreen() {
   const mode = useGameSetupStore((state) => state.mode);
   const selectedPackId = useGameSetupStore((state) => state.selectedPackId);
   const selectPack = useGameSetupStore((state) => state.selectPack);
+  const entitled = usePurchaseStore((state) => state.entitlement === 'premium');
   const bundle = loadEmbeddedContent(locale);
   const wide = width >= 680;
   const catalog = bundle
@@ -55,6 +57,12 @@ export default function PacksScreen() {
     selectPack(packId);
     setDetail(null);
     router.push('/session-setup');
+  };
+
+  const unlock = (packId: string) => {
+    selectPack(packId);
+    setDetail(null);
+    router.push({ pathname: '/premium', params: { packId } });
   };
 
   if (!bundle) {
@@ -141,8 +149,10 @@ export default function PacksScreen() {
       <PackDetailModal
         item={detail}
         selected={detail?.id === selectedPackId}
+        entitled={entitled}
         onClose={() => setDetail(null)}
         onSelect={choose}
+        onUnlock={unlock}
       />
     </AppScreen>
   );
