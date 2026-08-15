@@ -198,6 +198,7 @@ export default function HomeScreen() {
           variant="ghost"
           onPress={() => router.push('/favorites')}
         />
+        <AppButton label="Today’s question" variant="ghost" onPress={() => router.push('/daily')} />
         <AppText variant="caption" tone="muted" style={styles.centered}>
           No account. No answers saved. Passing is always allowed.
         </AppText>

@@ -139,3 +139,20 @@ Checkpoint PR9 analytics core: no additional observations.
 **Principle:** Local validation should keep incidental tool state inside a writable, disposable path instead of inheriting an unavailable user-home default.
 
 Checkpoint PR9 completion: Observation 6 captures the only additional improvement opportunity.
+
+### Observation 7: Clear optional Zustand fields explicitly during migrations
+
+**Status:** OPEN
+**Date:** 2026-08-15
+**Session context:** Adding a removable daily reminder time to an additively migrated persisted settings store
+**Skill:** ponytail
+**Type:** cross-cutting
+**Phase/Area:** State persistence
+
+**Issue:** Zustand's default `set` merges objects, so omitting an optional key from a migrated settings object did not clear the previously stored in-memory value. A reminder time leaked between resets even though persistence correctly omitted it.
+
+**Suggested improvement:** When a persisted field must be removable, model the hydrated state as an explicit `T | undefined` key or replace the whole state slice instead of relying on omission during a merge.
+
+**Principle:** In merge-based stores, absence means “leave unchanged”; clearing requires an explicit value or replacement semantics.
+
+Checkpoint PR10 completion: Observation 7 captures the only additional improvement opportunity.

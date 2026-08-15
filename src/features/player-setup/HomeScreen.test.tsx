@@ -110,4 +110,14 @@ describe('HomeScreen', () => {
     await fireEvent.press(screen.getByRole('button', { name: 'Privacy' }));
     expect(mockPush).toHaveBeenCalledWith('/settings');
   });
+
+  it('opens today’s deterministic question', async () => {
+    const screen = await render(
+      <ThemeProvider forcedScheme="light">
+        <HomeScreen />
+      </ThemeProvider>,
+    );
+    await fireEvent.press(screen.getByRole('button', { name: 'Today’s question' }));
+    expect(mockPush).toHaveBeenCalledWith('/daily');
+  });
 });
