@@ -1,4 +1,5 @@
 import { Component, type ErrorInfo, type PropsWithChildren, type ReactNode } from 'react';
+import { router } from 'expo-router';
 import { StyleSheet, View } from 'react-native';
 
 import { AppButton, AppText } from '@/components/primitives';
@@ -26,6 +27,7 @@ function ErrorFallback({ retry }: { retry: () => void }) {
           Your answers were never recorded. Try returning to the game when you are ready.
         </AppText>
         <AppButton label="Try again" onPress={retry} />
+        <AppButton label="Return home" variant="ghost" onPress={() => router.replace('/home')} />
       </View>
     </View>
   );

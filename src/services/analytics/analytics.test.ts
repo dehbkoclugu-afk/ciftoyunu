@@ -42,4 +42,15 @@ describe('analytics runtime', () => {
       'not privacy-safe',
     );
   });
+
+  it('isolates provider failures from product code', async () => {
+    const failing = {
+      identify: jest.fn(async () => Promise.reject(new Error('offline'))),
+      capture: jest.fn(async () => Promise.reject(new Error('offline'))),
+      shutdown: jest.fn(async () => Promise.reject(new Error('offline'))),
+    };
+    await expect(configureAnalytics('anonymous-1', true, failing)).resolves.toBeUndefined();
+    expect(() => track('app_opened')).not.toThrow();
+    await expect(configureAnalytics('anonymous-1', false)).resolves.toBeUndefined();
+  });
 });

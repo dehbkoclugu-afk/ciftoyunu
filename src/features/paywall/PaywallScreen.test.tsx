@@ -3,6 +3,7 @@ import { act, fireEvent, render, waitFor } from '@testing-library/react-native';
 
 import { ThemeProvider } from '@/design/ThemeProvider';
 import type { PurchaseOffering } from '@/services/purchases/types';
+import { track } from '@/services/analytics/runtime';
 import { usePurchaseStore } from '@/state/purchaseStore';
 import { useSettingsStore } from '@/state/settingsStore';
 import { DEFAULT_SETTINGS } from '@/storage/migrations';
@@ -18,6 +19,7 @@ jest.mock('expo-router', () => ({
     replace: (...args: unknown[]) => mockReplace(...args),
   },
 }));
+jest.mock('@/services/analytics/runtime', () => ({ track: jest.fn() }));
 
 const offering: PurchaseOffering = {
   id: 'default',
@@ -90,12 +92,20 @@ describe('paywall screen', () => {
     expect(screen.getByRole('radio', { name: /Annual/ }).props.accessibilityState).toEqual(
       expect.objectContaining({ checked: true }),
     );
+    expect(track).toHaveBeenCalledWith(
+      'paywall_viewed',
+      expect.objectContaining({ placement: 'pack_unlock' }),
+    );
   });
 
   it('selects a plan and locks purchase actions while purchasing', async () => {
     const screen = await renderScreen();
     await fireEvent.press(screen.getByRole('radio', { name: /Monthly/ }));
     await waitFor(() => expect(usePurchaseStore.getState().selectedPackageId).toBe('monthly'));
+    expect(track).toHaveBeenCalledWith(
+      'package_selected',
+      expect.objectContaining({ selected_package: 'monthly' }),
+    );
 
     await act(() => usePurchaseStore.setState({ status: 'purchasing' }));
     await waitFor(() => {
@@ -118,6 +128,7 @@ describe('paywall screen', () => {
 
     expect(mockBack).toHaveBeenCalled();
     expect(restore).toHaveBeenCalled();
+    expect(track).toHaveBeenCalledWith('restore_started', expect.any(Object));
     await waitFor(() => expect(open).toHaveBeenCalledTimes(2));
   });
 

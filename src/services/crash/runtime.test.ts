@@ -14,4 +14,16 @@ describe('crash reporting runtime', () => {
     captureException(new Error('ignored'));
     expect(adapter.captureException).toHaveBeenCalledTimes(1);
   });
+
+  it('isolates provider capture and shutdown failures', async () => {
+    const adapter: CrashAdapter = {
+      captureException: () => {
+        throw new Error('provider failed');
+      },
+      close: async () => Promise.reject(new Error('provider failed')),
+    };
+    await configureCrashReporting(true, adapter);
+    expect(() => captureException(new Error('product failure'))).not.toThrow();
+    await expect(configureCrashReporting(false)).resolves.toBeUndefined();
+  });
 });
