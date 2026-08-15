@@ -118,3 +118,5 @@ Checkpoint PR8 implementation: no additional observations.
 **Suggested improvement:** Document every Doctor check that performs a registry request and provide one supported flag that deterministically limits Doctor to local-only checks.
 
 **Principle:** An offline verification mode is reliable only when every network-capable check is either disabled or converted into a non-failing diagnostic before execution.
+
+Checkpoint PR8 completion: Observation 5 captures the only additional improvement opportunity.

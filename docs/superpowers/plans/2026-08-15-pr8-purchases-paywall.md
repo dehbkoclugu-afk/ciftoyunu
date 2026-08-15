@@ -148,10 +148,10 @@
 - Consumes: completed PR 8 tree
 - Produces: green local gates and a draft PR targeting `agent/pr7-gameplay-recap`
 
-- [ ] Run Prettier, ESLint with zero warnings, TypeScript, and all Jest suites.
-- [ ] Run content validation, duplicate scan, inventory report, and generated drift check.
-- [ ] Run release-env preview success and production missing-env failure checks.
-- [ ] Run Expo Doctor and offline production web export.
-- [ ] Perform a paywall accessibility/copy/state audit against the approved design and UI pre-delivery rules.
-- [ ] Flush task observations and close every plan checkbox.
-- [ ] Commit intentionally, publish `agent/pr8-purchases-paywall`, open a stacked draft PR, and wait for green CI.
+- [x] Run Prettier, ESLint with zero warnings, TypeScript, and all Jest suites.
+- [x] Run content validation, duplicate scan, inventory report, and generated drift check.
+- [x] Run release-env preview success and production missing-env failure checks.
+- [x] Run Expo Doctor and offline production web export.
+- [x] Perform a paywall accessibility/copy/state audit against the approved design and UI pre-delivery rules.
+- [x] Flush task observations and close every plan checkbox.
+- [x] Commit intentionally, publish `agent/pr8-purchases-paywall`, open a stacked draft PR, and wait for green CI.
