@@ -5,6 +5,7 @@ import { insertSpecialCards, type ActiveSession } from '@/features/session/gamep
 import { buildSession } from '@/features/session/sessionEngine';
 import { resolvePlayers } from '@/features/player-setup/playerSetup';
 import { loadEmbeddedContent } from '@/content/loader';
+import { track } from '@/services/analytics/runtime';
 import { useSessionStore } from '@/state/sessionStore';
 
 import { GameplayScreen } from './GameplayScreen';
@@ -16,6 +17,7 @@ const mockReplace = jest.fn();
 jest.mock('expo-router', () => ({
   router: { replace: (...args: unknown[]) => mockReplace(...args) },
 }));
+jest.mock('@/services/analytics/runtime', () => ({ track: jest.fn() }));
 
 const bundle = loadEmbeddedContent('en')!;
 const players = resolvePlayers([
@@ -103,6 +105,10 @@ describe('gameplay screen', () => {
 
     expect(screen.getByLabelText('Card 1 of 11')).toBeTruthy();
     expect(screen.getByText(/answer first/i)).toHaveTextContent(/Maya|Noah/);
+    expect(track).toHaveBeenCalledWith(
+      'question_viewed',
+      expect.objectContaining({ session_id: 'session-1', question_id: expect.any(String) }),
+    );
   });
 
   it('keeps favorite separate from Pass and Next', async () => {
@@ -115,9 +121,17 @@ describe('gameplay screen', () => {
       question.kind === 'question' ? question.question.id : '',
     );
     expect(state.advance).not.toHaveBeenCalled();
+    expect(track).toHaveBeenCalledWith(
+      'question_favorited',
+      expect.objectContaining({ session_id: 'session-1' }),
+    );
 
     await fireEvent.press(screen.getByRole('button', { name: 'Pass' }));
     expect(state.advance).toHaveBeenCalledWith('skip');
+    expect(track).toHaveBeenCalledWith(
+      'question_skipped',
+      expect.objectContaining({ interaction_type: 'skip' }),
+    );
     await fireEvent.press(screen.getByRole('button', { name: 'Next' }));
     expect(state.advance).toHaveBeenCalledWith('next');
   });

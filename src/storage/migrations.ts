@@ -18,6 +18,8 @@ export type SettingsData = {
   dailyReminderTime?: string;
   rememberPlayers: boolean;
   onboardingCompleted: boolean;
+  analyticsEnabled: boolean;
+  crashReportingEnabled: boolean;
 };
 
 export type SettingsEnvelope = {
@@ -37,6 +39,8 @@ export const DEFAULT_SETTINGS: SettingsData = {
   notificationsEnabled: false,
   rememberPlayers: false,
   onboardingCompleted: false,
+  analyticsEnabled: false,
+  crashReportingEnabled: false,
 };
 
 function isRecord(value: unknown): value is Record<string, unknown> {
@@ -80,6 +84,8 @@ export function migrateSettings(value: unknown): SettingsData {
     ...(dailyReminderTime ? { dailyReminderTime } : {}),
     rememberPlayers: asBoolean(source.rememberPlayers, false),
     onboardingCompleted: asBoolean(source.onboardingCompleted, false),
+    analyticsEnabled: asBoolean(source.analyticsEnabled, false),
+    crashReportingEnabled: asBoolean(source.crashReportingEnabled, false),
   };
 }
 

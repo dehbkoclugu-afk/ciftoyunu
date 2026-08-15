@@ -120,3 +120,22 @@ Checkpoint PR8 implementation: no additional observations.
 **Principle:** An offline verification mode is reliable only when every network-capable check is either disabled or converted into a non-failing diagnostic before execution.
 
 Checkpoint PR8 completion: Observation 5 captures the only additional improvement opportunity.
+
+Checkpoint PR9 analytics core: no additional observations.
+
+### Observation 6: Redirect Expo CLI state before sandboxed local checks
+
+**Status:** OPEN
+**Date:** 2026-08-15
+**Session context:** Running Expo lint, config, and export verification in a workspace without write access to the default user settings directory
+**Skill:** task-observer
+**Type:** cross-cutting
+**Phase/Area:** Verification
+
+**Issue:** Expo CLI attempted to create `/root/.expo` for anonymous CLI state before a local lint command ran, so a network-free verification failed on an unrelated filesystem permission. Disabling telemetry alone did not avoid the initial state path in this environment.
+
+**Suggested improvement:** Verification guidance for Expo projects should probe the settings directory and, when it is not writable, redirect Expo CLI state to an explicit temporary directory before invoking local commands.
+
+**Principle:** Local validation should keep incidental tool state inside a writable, disposable path instead of inheriting an unavailable user-home default.
+
+Checkpoint PR9 completion: Observation 6 captures the only additional improvement opportunity.

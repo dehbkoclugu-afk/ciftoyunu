@@ -36,6 +36,8 @@ describe('settings repository', () => {
     expect(settings.locale).toBe('ar');
     expect(settings.comfortLevel).toBe('spicy');
     expect(settings.matureContentEnabled).toBe(false);
+    expect(settings.analyticsEnabled).toBe(false);
+    expect(settings.crashReportingEnabled).toBe(false);
   });
 
   it('quarantines corrupt settings and returns safe defaults', async () => {

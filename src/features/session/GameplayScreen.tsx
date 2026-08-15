@@ -5,13 +5,14 @@
  * FIRST VIEWPORT: Pause and progress above one oversized card; three plain actions below.
  * FORM: Operate-mode tactile card stage, first-ranked for face-to-face attention.
  */
-import { useEffect, useMemo, useState } from 'react';
+import { useEffect, useMemo, useRef, useState } from 'react';
 import { router } from 'expo-router';
 import { PanResponder, Pressable, StyleSheet, View } from 'react-native';
 
 import { AppScreen, AppText } from '@/components/primitives';
 import { useAppTheme } from '@/design';
 import { getLocaleOption } from '@/i18n';
+import { track } from '@/services/analytics/runtime';
 import { useSessionStore } from '@/state/sessionStore';
 
 import { getSwipeAction, getViewedQuestions, type CardAction } from './gameplay';
@@ -66,6 +67,7 @@ export function GameplayScreen() {
   const toggleFavorite = useSessionStore((state) => state.toggleFavorite);
   const complete = useSessionStore((state) => state.complete);
   const clear = useSessionStore((state) => state.clear);
+  const viewedCardKey = useRef<string | null>(null);
 
   useEffect(() => {
     if (!activeSession) router.replace('/home');
@@ -80,7 +82,41 @@ export function GameplayScreen() {
   const favorite = currentQuestionId ? favoriteIds.includes(currentQuestionId) : false;
   const rtl = activeSession ? getLocaleOption(activeSession.locale).rtl : false;
 
+  useEffect(() => {
+    if (!activeSession || !currentCard) return;
+    const key = `${activeSession.id}:${activeSession.currentIndex}`;
+    if (viewedCardKey.current === key) return;
+    viewedCardKey.current = key;
+    if (currentCard.kind === 'question') {
+      track('question_viewed', {
+        question_id: currentCard.question.id,
+        intent_key: currentCard.question.intentKey,
+        pack_id: activeSession.packIds[0] ?? 'unknown',
+        intensity: currentCard.question.intensity,
+        maturity: currentCard.question.maturity,
+        interaction_type: currentCard.question.interactionType,
+        starter_position: currentCard.question.starter,
+        session_id: activeSession.id,
+        session_index: activeSession.currentIndex,
+        time_on_card_ms: 0,
+      });
+    } else {
+      track('special_card_viewed', {
+        special_card_type: currentCard.type,
+        session_id: activeSession.id,
+        session_index: activeSession.currentIndex,
+      });
+    }
+  }, [activeSession, currentCard]);
+
   const move = async (action: CardAction) => {
+    if (activeSession && currentCard?.kind === 'question' && action !== 'next') {
+      track(action === 'reported' ? 'question_reported' : 'question_skipped', {
+        question_id: currentCard.question.id,
+        session_id: activeSession.id,
+        interaction_type: action,
+      });
+    }
     const next = await advance(action);
     if (next?.completedAt) router.replace('/recap');
   };
@@ -105,6 +141,11 @@ export function GameplayScreen() {
   const end = async () => {
     setPaused(false);
     const completed = await complete();
+    if (completed)
+      track('session_completed', {
+        session_id: completed.id,
+        cards_viewed: completed.currentIndex + 1,
+      });
     if (completed && getViewedQuestions(completed).length >= 5) router.replace('/recap');
     else {
       await clear();
@@ -159,7 +200,14 @@ export function GameplayScreen() {
           }
           selected={favorite}
           disabled={!currentQuestionId}
-          onPress={() => currentQuestionId && void toggleFavorite(currentQuestionId)}
+          onPress={() => {
+            if (!currentQuestionId || !activeSession) return;
+            track(favorite ? 'question_unfavorited' : 'question_favorited', {
+              question_id: currentQuestionId,
+              session_id: activeSession.id,
+            });
+            void toggleFavorite(currentQuestionId);
+          }}
         />
         <GameAction label="Next" onPress={() => void move('next')} />
       </View>

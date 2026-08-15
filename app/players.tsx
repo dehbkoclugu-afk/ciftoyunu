@@ -13,6 +13,7 @@ import { AppButton, AppScreen, AppText } from '@/components/primitives';
 import { useAppTheme } from '@/design';
 import { PlayerRow } from '@/features/player-setup/PlayerRow';
 import { findDuplicatePlayerNames } from '@/features/player-setup/playerSetup';
+import { track } from '@/services/analytics/runtime';
 import { useGameSetupStore } from '@/state/gameSetupStore';
 import { useSettingsStore } from '@/state/settingsStore';
 
@@ -39,6 +40,11 @@ export default function PlayersScreen() {
 
   const finish = () => {
     setSaving(true);
+    track('players_configured', {
+      mode,
+      player_count: players.length,
+      remember_players: rememberPlayers,
+    });
     void complete(rememberPlayers).then(() => router.replace('/packs'));
   };
 

@@ -5,6 +5,9 @@ const requiredProductionValues = [
   'REVENUECAT_ANDROID_API_KEY',
   'APP_TERMS_URL',
   'APP_PRIVACY_URL',
+  'POSTHOG_API_KEY',
+  'POSTHOG_HOST',
+  'SENTRY_DSN',
 ] as const;
 
 function validateProductionConfig(): void {
@@ -12,6 +15,9 @@ function validateProductionConfig(): void {
   const missing = requiredProductionValues.filter((name) => !process.env[name]?.trim());
   if (missing.length > 0) {
     throw new Error(`Production environment is missing: ${missing.join(', ')}`);
+  }
+  if (!process.env.POSTHOG_HOST?.startsWith('https://')) {
+    throw new Error('Production POSTHOG_HOST must use HTTPS.');
   }
 }
 
@@ -37,7 +43,7 @@ export default ({ config }: ConfigContext): ExpoConfig => {
     web: {
       bundler: 'metro',
     },
-    plugins: ['expo-router'],
+    plugins: ['expo-router', '@sentry/react-native/expo'],
     experiments: {
       typedRoutes: true,
     },
@@ -48,6 +54,9 @@ export default ({ config }: ConfigContext): ExpoConfig => {
       revenueCatAndroidApiKey: process.env.REVENUECAT_ANDROID_API_KEY,
       termsUrl: process.env.APP_TERMS_URL,
       privacyUrl: process.env.APP_PRIVACY_URL,
+      postHogApiKey: process.env.POSTHOG_API_KEY,
+      postHogHost: process.env.POSTHOG_HOST,
+      sentryDsn: process.env.SENTRY_DSN,
     },
   };
 };

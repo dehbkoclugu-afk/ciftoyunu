@@ -8,6 +8,7 @@ export const LAST_SESSION_KEY = 'duo:v1:last-session';
 export const LAST_SESSION_VERSION = 1;
 export const FAVORITES_KEY = 'duo:v1:favorites';
 export const FAVORITES_VERSION = 1;
+export const ANONYMOUS_ID_KEY = 'duo:v1:anonymous-id';
 
 export function getSettingsQuarantineKey(timestamp: number): string {
   return 'duo:quarantine:' + timestamp + ':settings';

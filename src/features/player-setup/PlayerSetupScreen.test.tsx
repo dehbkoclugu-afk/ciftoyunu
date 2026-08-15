@@ -4,6 +4,7 @@ import ModeScreen from '../../../app/mode';
 import PlayersScreen from '../../../app/players';
 import { ThemeProvider } from '@/design/ThemeProvider';
 import { createDefaultPlayers } from '@/features/player-setup/playerSetup';
+import { track } from '@/services/analytics/runtime';
 import { DEFAULT_SETTINGS } from '@/storage/migrations';
 import { useGameSetupStore } from '@/state/gameSetupStore';
 import { useSettingsStore } from '@/state/settingsStore';
@@ -19,6 +20,7 @@ jest.mock('expo-router', () => ({
     replace: (...args: unknown[]) => mockReplace(...args),
   },
 }));
+jest.mock('@/services/analytics/runtime', () => ({ track: jest.fn() }));
 
 function renderWithTheme(element: React.ReactElement) {
   return render(<ThemeProvider forcedScheme="light">{element}</ThemeProvider>);
@@ -42,6 +44,7 @@ describe('mode and player setup screens', () => {
 
     await fireEvent.press(screen.getByRole('radio', { name: 'Friends' }));
     expect(useGameSetupStore.getState().mode).toBe('friends');
+    expect(track).toHaveBeenCalledWith('mode_selected', { mode: 'friends' });
 
     await fireEvent.press(screen.getByRole('button', { name: 'Continue' }));
     expect(mockPush).toHaveBeenCalledWith('/players');
@@ -83,5 +86,10 @@ describe('mode and player setup screens', () => {
 
     await waitFor(() => expect(mockReplace).toHaveBeenCalledWith('/packs'));
     expect(useGameSetupStore.getState().setupCompleted).toBe(true);
+    expect(track).toHaveBeenCalledWith('players_configured', {
+      mode: 'couple',
+      player_count: 2,
+      remember_players: false,
+    });
   });
 });

@@ -7,6 +7,7 @@ import { AppButton, AppScreen, AppText } from '@/components/primitives';
 import { useAppTheme } from '@/design';
 import { OnboardingHeader } from '@/features/onboarding/OnboardingHeader';
 import { localeCatalog, normalizeLocale, type SupportedLocale } from '@/i18n';
+import { track } from '@/services/analytics/runtime';
 import { useSettingsStore } from '@/state/settingsStore';
 
 export default function LanguageScreen() {
@@ -26,7 +27,10 @@ export default function LanguageScreen() {
     );
   }, [query]);
 
-  const chooseLocale = (nextLocale: SupportedLocale) => setLocale(nextLocale);
+  const chooseLocale = (nextLocale: SupportedLocale) => {
+    setLocale(nextLocale);
+    track('locale_changed', { locale: nextLocale });
+  };
 
   return (
     <AppScreen scroll contentStyle={{ paddingBottom: theme.spacing[8] }}>
