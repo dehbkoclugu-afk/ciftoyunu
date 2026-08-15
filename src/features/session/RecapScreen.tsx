@@ -13,6 +13,7 @@ import { AppButton, AppScreen, AppText } from '@/components/primitives';
 import { useAppTheme } from '@/design';
 import { getSessionMetrics, getViewedQuestions } from '@/features/session/gameplay';
 import { useSessionStore } from '@/state/sessionStore';
+import { usePurchaseStore } from '@/state/purchaseStore';
 
 function minutesLabel(elapsedMs: number): string {
   const minutes = Math.max(1, Math.round(elapsedMs / 60_000));
@@ -26,6 +27,7 @@ export function RecapScreen() {
   const favoriteIds = useSessionStore((state) => state.favoriteIds);
   const chooseKeeper = useSessionStore((state) => state.chooseKeeper);
   const clear = useSessionStore((state) => state.clear);
+  const premium = usePurchaseStore((state) => state.entitlement === 'premium');
 
   useEffect(() => {
     if (!activeSession) router.replace('/home');
@@ -144,6 +146,23 @@ export function RecapScreen() {
         </AppText>
       ) : null}
 
+      {!premium ? (
+        <View
+          style={[
+            styles.upsell,
+            { backgroundColor: theme.colors.primary, borderRadius: theme.radius.card },
+          ]}
+        >
+          <AppText variant="caption" style={{ color: theme.colors.onPrimary }}>
+            KEEP THE TABLE OPEN
+          </AppText>
+          <AppText variant="h2" style={{ color: theme.colors.onPrimary }}>
+            Open every conversation.
+          </AppText>
+          <AppButton label="See premium plans" onPress={() => router.push('/premium')} />
+        </View>
+      ) : null}
+
       <View style={styles.actions}>
         <AppButton
           label={`Play ${activeSession.packTitle} again`}
@@ -183,5 +202,6 @@ const styles = StyleSheet.create({
   },
   shareMark: { position: 'absolute', left: 0, top: 26, bottom: 26, width: 1 },
   alert: { marginTop: 12 },
+  upsell: { marginTop: 28, padding: 24, gap: 12 },
   actions: { marginTop: 28, gap: 10 },
 });

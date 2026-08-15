@@ -99,3 +99,24 @@ Checkpoint PR7 planning: no additional observations.
 Checkpoint PR7 implementation: no additional observations.
 
 Checkpoint PR7 completion: no additional observations.
+
+Checkpoint PR8 planning: no additional observations.
+
+Checkpoint PR8 implementation: no additional observations.
+
+### Observation 5: Make Expo Doctor's offline scope deterministic
+
+**Status:** OPEN
+**Date:** 2026-08-15
+**Session context:** Validating an Expo purchases integration in a network-restricted workspace
+**Skill:** task-observer
+**Type:** cross-cutting
+**Phase/Area:** Verification
+
+**Issue:** Expo Doctor still requested `registry.npmjs.org` after dependency-version and React Native Directory checks were explicitly disabled. `EXPO_OFFLINE` and the network-warning flag did not prevent the sandbox-level denial, so the otherwise passing local checks could not reach a complete Doctor result.
+
+**Suggested improvement:** Document every Doctor check that performs a registry request and provide one supported flag that deterministically limits Doctor to local-only checks.
+
+**Principle:** An offline verification mode is reliable only when every network-capable check is either disabled or converted into a non-failing diagnostic before execution.
+
+Checkpoint PR8 completion: Observation 5 captures the only additional improvement opportunity.

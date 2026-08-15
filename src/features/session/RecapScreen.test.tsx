@@ -7,6 +7,7 @@ import { buildSession } from '@/features/session/sessionEngine';
 import { resolvePlayers } from '@/features/player-setup/playerSetup';
 import { loadEmbeddedContent } from '@/content/loader';
 import { useSessionStore } from '@/state/sessionStore';
+import { usePurchaseStore } from '@/state/purchaseStore';
 
 import { RecapScreen } from './RecapScreen';
 
@@ -96,6 +97,7 @@ describe('recap screen', () => {
       chooseKeeper: jest.fn(async () => undefined),
       clear: jest.fn(async () => undefined),
     });
+    usePurchaseStore.setState({ entitlement: 'free' });
   });
 
   afterAll(() => useSessionStore.setState(original));
@@ -150,5 +152,18 @@ describe('recap screen', () => {
     expect(mockPush).toHaveBeenCalledWith('/favorites');
     await fireEvent.press(screen.getByRole('button', { name: 'Done' }));
     await waitFor(() => expect(mockReplace).toHaveBeenCalledWith('/home'));
+  });
+
+  it('offers one premium path to free users', async () => {
+    const screen = await renderScreen();
+    expect(screen.getAllByRole('button', { name: 'See premium plans' })).toHaveLength(1);
+    await fireEvent.press(screen.getByRole('button', { name: 'See premium plans' }));
+    expect(mockPush).toHaveBeenCalledWith('/premium');
+  });
+
+  it('does not upsell verified premium users', async () => {
+    usePurchaseStore.setState({ entitlement: 'premium' });
+    const screen = await renderScreen();
+    expect(screen.queryByRole('button', { name: 'See premium plans' })).toBeNull();
   });
 });

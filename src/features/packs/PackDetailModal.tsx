@@ -10,11 +10,20 @@ import type { PackCatalogItem } from './packCatalog';
 type PackDetailModalProps = {
   item: PackCatalogItem | null;
   selected: boolean;
+  entitled: boolean;
   onClose: () => void;
   onSelect: (packId: string) => void;
+  onUnlock: (packId: string) => void;
 };
 
-export function PackDetailModal({ item, selected, onClose, onSelect }: PackDetailModalProps) {
+export function PackDetailModal({
+  item,
+  selected,
+  entitled,
+  onClose,
+  onSelect,
+  onUnlock,
+}: PackDetailModalProps) {
   const theme = useAppTheme();
 
   return (
@@ -100,9 +109,8 @@ export function PackDetailModal({ item, selected, onClose, onSelect }: PackDetai
             </View>
 
             <View style={styles.action}>
-              {item.premium ? (
+              {item.premium && !entitled ? (
                 <View
-                  accessibilityRole="text"
                   style={[
                     styles.locked,
                     {
@@ -113,8 +121,9 @@ export function PackDetailModal({ item, selected, onClose, onSelect }: PackDetai
                 >
                   <AppText variant="button">Premium access is required for this pack.</AppText>
                   <AppText variant="bodySmall" tone="muted">
-                    Preview the questions and decide whether this deck fits your table.
+                    Unlock this deck and every current premium conversation.
                   </AppText>
+                  <AppButton label="Unlock all packs" onPress={() => onUnlock(item.id)} />
                 </View>
               ) : selected ? (
                 <AppButton label="Selected" disabled onPress={() => undefined} />

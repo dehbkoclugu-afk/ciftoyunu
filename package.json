@@ -19,6 +19,7 @@
     "content:build": "node --import tsx scripts/content-tool.ts build",
     "content:check": "node --import tsx scripts/content-tool.ts check",
     "content:diff": "node --import tsx scripts/content-tool.ts check",
+    "release:env:check": "node --import tsx scripts/validate-release-env.ts",
     "expo:doctor": "expo-doctor",
     "export:web": "expo export --platform web",
     "validate": "npm run format:check && npm run lint && npm run typecheck && npm run test -- --runInBand && npm run content:validate && npm run content:duplicates && npm run content:check"
@@ -35,6 +36,7 @@
     "react": "19.2.3",
     "react-dom": "19.2.3",
     "react-native": "0.86.2",
+    "react-native-purchases": "10.7.1",
     "react-native-safe-area-context": "~5.7.0",
     "react-native-screens": "~4.26.0",
     "react-native-web": "~0.21.2",

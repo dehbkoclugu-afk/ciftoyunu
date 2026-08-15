@@ -3,6 +3,7 @@ import { create } from 'zustand';
 import { loadPersistedSettings, useSettingsStore } from './settingsStore';
 import { useGameSetupStore } from './gameSetupStore';
 import type { BootStatus } from './routeDecision';
+import { usePurchaseStore } from './purchaseStore';
 import { useSessionStore } from './sessionStore';
 
 type AppStore = {
@@ -21,6 +22,7 @@ export const useAppStore = create<AppStore>((set, get) => ({
     await Promise.all([
       useGameSetupStore.getState().hydrate(settings.rememberPlayers),
       useSessionStore.getState().hydrate(),
+      usePurchaseStore.getState().hydrate(),
     ]);
     set({ bootStatus: 'ready' });
   },

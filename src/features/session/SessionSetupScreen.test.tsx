@@ -3,6 +3,7 @@ import { fireEvent, render, waitFor } from '@testing-library/react-native';
 import { ThemeProvider } from '@/design/ThemeProvider';
 import { createDefaultPlayers } from '@/features/player-setup/playerSetup';
 import { useGameSetupStore } from '@/state/gameSetupStore';
+import { usePurchaseStore } from '@/state/purchaseStore';
 import { useSessionStore } from '@/state/sessionStore';
 import { useSettingsStore } from '@/state/settingsStore';
 import { DEFAULT_SETTINGS } from '@/storage/migrations';
@@ -37,6 +38,7 @@ describe('session setup screen', () => {
       persistenceFailed: false,
     });
     useSessionStore.setState({ start: originalStart, startError: null, persistenceFailed: false });
+    usePurchaseStore.setState({ entitlement: 'free' });
   });
 
   it('defaults to Standard and Mixed with an honest estimate', async () => {
@@ -103,5 +105,32 @@ describe('session setup screen', () => {
     expect(await screen.findByRole('alert')).toHaveTextContent(
       'No questions match these choices. Remove a topic filter or lower the intensity.',
     );
+  });
+
+  it('sends an unentitled premium selection to the paywall', async () => {
+    useGameSetupStore.setState({ selectedPackId: 'deep_night' });
+    const screen = await renderScreen();
+    await fireEvent.press(screen.getByRole('button', { name: 'Unlock all packs' }));
+    expect(mockReplace).toHaveBeenCalledWith({
+      pathname: '/premium',
+      params: { packId: 'deep_night' },
+    });
+  });
+
+  it('starts a premium pack only with verified entitlement', async () => {
+    const start = jest.fn(async () => ({ id: 'premium-session' }));
+    useGameSetupStore.setState({ selectedPackId: 'deep_night' });
+    usePurchaseStore.setState({ entitlement: 'premium' });
+    useSessionStore.setState({ start: start as never });
+    const screen = await renderScreen();
+
+    await fireEvent.press(screen.getByRole('button', { name: 'Start Deep Night' }));
+    expect(start).toHaveBeenCalledWith(
+      expect.objectContaining({
+        packIds: ['deep_night'],
+        entitledPackIds: ['deep_night'],
+      }),
+    );
+    await waitFor(() => expect(mockReplace).toHaveBeenCalledWith('/play'));
   });
 });

@@ -19,6 +19,7 @@ import {
   type TopicTag,
 } from '@/features/session/sessionEngine';
 import { useGameSetupStore } from '@/state/gameSetupStore';
+import { usePurchaseStore } from '@/state/purchaseStore';
 import { useSessionStore } from '@/state/sessionStore';
 import { useSettingsStore } from '@/state/settingsStore';
 
@@ -64,6 +65,7 @@ export function SessionSetupScreen() {
   const mode = useGameSetupStore((state) => state.mode);
   const playerDrafts = useGameSetupStore((state) => state.players);
   const selectedPackId = useGameSetupStore((state) => state.selectedPackId);
+  const entitlement = usePurchaseStore((state) => state.entitlement);
   const start = useSessionStore((state) => state.start);
   const bundle = loadEmbeddedContent(locale);
   const pack = bundle?.packs.find((item) => item.id === selectedPackId);
@@ -79,14 +81,18 @@ export function SessionSetupScreen() {
   };
 
   const begin = async () => {
-    if (!bundle || !pack || !packCopy || pack.premium) return;
+    if (!bundle || !pack || !packCopy) return;
+    if (pack.premium && entitlement !== 'premium') {
+      router.replace({ pathname: '/premium', params: { packId: pack.id } });
+      return;
+    }
     setStarting(true);
     setStartFailed(false);
     const session = await start({
       bundle,
       mode,
       packIds: [pack.id],
-      entitledPackIds: [],
+      entitledPackIds: entitlement === 'premium' ? [pack.id] : [],
       players,
       durationMinutes,
       intensityPreset,
@@ -111,14 +117,20 @@ export function SessionSetupScreen() {
     );
   }
 
-  if (pack.premium) {
+  if (pack.premium && entitlement !== 'premium') {
     return (
       <AppScreen contentStyle={styles.empty}>
         <AppText variant="display">Premium access is needed for this pack.</AppText>
-        <AppText tone="muted">
-          Choose a free deck now. Purchasing arrives in the next release.
-        </AppText>
-        <AppButton label="Choose a free pack" onPress={() => router.replace('/packs')} />
+        <AppText tone="muted">Unlock this deck and every current premium conversation.</AppText>
+        <AppButton
+          label="Unlock all packs"
+          onPress={() => router.replace({ pathname: '/premium', params: { packId: pack.id } })}
+        />
+        <AppButton
+          label="Choose a free pack"
+          variant="secondary"
+          onPress={() => router.replace('/packs')}
+        />
       </AppScreen>
     );
   }
